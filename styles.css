@@ -1,0 +1,681 @@
+/* ========================================
+   MODERN ACADEMIC WEBSITE STYLES
+   Two-accent color system: Green + Coral
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ========== COLOR THEMES ========== */
+
+/* Dark Mode (default) */
+:root[data-theme="dark"] {
+    --color-bg: #1a1f2e;
+    --color-surface: #232936;
+    --color-surface-elevated: #2d3548;
+    --color-text-primary: #e6edf3;
+    --color-text-secondary: #9ca3af;
+
+    /* Dual accent colors */
+    --color-accent-primary: #10b981;      /* Emerald green */
+    --color-accent-secondary: #d97706;    /* ✔ UPDATED: Muted amber for dark mode */
+
+    --color-border: #374151;
+    --color-highlight-primary: rgba(16, 185, 129, 0.1);
+    --color-highlight-secondary: rgba(217, 119, 6, 0.12); /* ✔ UPDATED */
+}
+
+/* Light Mode */
+:root[data-theme="light"] {
+    --color-bg: #f9fafb;
+    --color-surface: #ffffff;
+    --color-surface-elevated: #f3f4f6;
+    --color-text-primary: #111827;
+    --color-text-secondary: #6b7280;
+    
+    /* Dual accent colors */
+    --color-accent-primary: #059669;      /* Forest green */
+    --color-accent-secondary: #ea580c;    /* Vibrant coral */
+    
+    --color-border: #e5e7eb;
+    --color-highlight-primary: rgba(5, 150, 105, 0.1);
+    --color-highlight-secondary: rgba(234, 88, 12, 0.1);
+}
+
+:root {
+    --font-body: 'Epilogue', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --transition-speed: 0.3s;
+}
+/* Default (light) theme values */
+/* ===========================
+   Icon colors per theme
+   =========================== */
+
+/* LIGHT THEME (default) */
+:root {
+    /* Icon foreground (glyph) */
+    --icon-fg: #ff7a00;           /* <-- your orange for light mode */
+    --icon-fg-hover: #ff7a00;     /* same as default; change if you want a different hover shade */
+  
+    /* Background tile & border (keep subtle; or set to transparent if you want only glyphs) */
+    --icon-bg: #fff7f0;           /* very light orange tint; or: transparent */
+    --icon-border: #ffd9b3;       /* subtle border; or: transparent */
+  
+    --icon-bg-hover: #ffe8d6;     /* slightly stronger tint on hover */
+    --icon-border-hover: #ffc99c; /* slightly stronger border */
+  }
+  
+  /* DARK THEME */
+  :root[data-theme="dark"] {
+    --icon-fg: #ffffff;           /* white glyph in dark mode */
+    --icon-fg-hover: #ffffff;     /* same on hover (or set to your dark accent) */
+  
+    --icon-bg: rgba(255,255,255,0.06);
+    --icon-border: rgba(255,255,255,0.12);
+  
+    --icon-bg-hover: rgba(255,255,255,0.12);
+    --icon-border-hover: rgba(255,255,255,0.18);
+  }
+  
+  /* ===========================
+     Icon button baseline
+     =========================== */
+  
+     .cv-icon-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+      
+        color: var(--icon-fg);                   /* glyph color */
+        background: var(--icon-bg);              /* tile background (set to transparent to remove tile) */
+        border: 1px solid var(--icon-border);
+      
+        text-decoration: none;
+        transition: transform .15s ease, background .15s ease,
+                    color .15s ease, border-color .15s ease;
+      }
+      
+      .cv-icon-link:hover {
+        transform: translateY(-1px);
+        color: var(--icon-fg-hover);
+        background: var(--icon-bg-hover);
+        border-color: var(--icon-border-hover);
+      }
+      
+      /* Ensure SVGs track the button color in both fill & stroke */
+      .cv-icon-link svg { width: 18px; height: 18px; display: block; }
+      .cv-icon-link svg * { fill: currentColor; stroke: currentColor; }
+
+
+.talk-hero-image {
+    display: block;
+    margin: 0 auto;          /* centers horizontally */
+    width: 100%;
+    height: clamp(160px, 26vw, 320px);
+    object-fit: cover;                 /* crop instead of stretching */
+    object-position: center;
+    border-radius: 10px;
+    display: block;       /* avoid too small on mobile */
+  }
+  @media (max-width: 700px) {
+    .talk-hero-image { width: 90%; }
+  }
+
+/* ========== BASE STYLES ========== */
+.filter-btn {
+    padding: 0.6rem 1.2rem;
+    background: var(--color-surface-elevated);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+  }
+  
+  .filter-btn:hover {
+    border-color: var(--color-accent-primary);
+    color: var(--color-accent-primary);
+  }
+  
+  .filter-btn.active {
+    background: var(--color-accent-primary);
+    color: white;
+    border-color: var(--color-accent-primary);
+  }
+
+body {
+    font-family: var(--font-body);
+    background: var(--color-bg);
+    color: var(--color-text-primary);
+    line-height: 1.7;
+    overflow-x: hidden;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* ========== GRAIN TEXTURE ========== */
+
+.grain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.03;
+    z-index: 100;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* ========== NAVIGATION ========== */
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: var(--color-surface);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+    transition: all var(--transition-speed);
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    font-family: var(--font-mono);
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+.logo:hover {
+    color: var(--color-accent-primary);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color var(--transition-speed);
+    position: relative;
+}
+
+.nav-links a.active {
+    color: var(--color-accent-primary);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-accent-primary), var(--color-accent-secondary));
+    transition: width var(--transition-speed);
+}
+
+.nav-links a:hover {
+    color: var(--color-accent-primary);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+/* Reduce spacing after keynotes */
+#keynotesWrap {
+    margin-bottom: 1.25rem;
+  }
+  
+  /* Timeline container */
+  #timeline {
+    position: relative;
+    padding-left: 3rem;
+}
+/* Remove huge global padding inside timeline year sections */
+#timeline section {
+    padding: 0; /* remove vertical padding */
+}
+
+#timeline::after {
+    content: "";
+    position: absolute;
+    left: calc(1.25rem - 4px);
+    top: calc(var(--timeline-start, 0) - 40px); /* ↑ raise arrow */
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 10px solid var(--color-accent-primary);
+}
+
+#timeline::before {
+    content: "";
+    position: absolute;
+    left: 1.25rem;
+    width: 5px;
+    background: var(--color-accent-primary);
+    top: calc(var(--timeline-start, 0) - 30px); /* stays aligned with arrow */
+    height: calc(100% - (var(--timeline-start, 0) - 30px));
+}
+
+
+
+.timeline-year {
+    position: relative;
+    padding-left: 1rem;
+}
+
+/* YEAR LABEL + TICK */
+.timeline-year .section-header {
+    position: relative;
+    padding-left: 0.5rem;
+}
+
+.timeline-year .section-header h3 {
+    color: var(--color-accent-primary);
+}
+
+/* Aligned tick */
+.timeline-year .section-header::before {
+    content: "";
+    position: absolute;
+    left: -1.5rem;
+    top: 50%;
+    width: 12px;
+    height: 2px;
+    background: var(--color-accent-primary);
+    transform: translateY(-50%);
+}
+
+/* Year header when it sits under the year's talks */
+.section-header--below-year {
+    margin-top: 2rem;     /* space between last talk and the year label */
+    margin-bottom: 2.5rem;/* space before the next year's talks start */
+  }
+  
+  /* Optional: style the year label in accent and add the small tick */
+  .timeline-year .section-header--below-year h3 {
+    color: var(--color-accent-primary);
+  }
+  
+  .timeline-year .section-header--below-year {
+    position: relative;
+    padding-left: 0.5rem;
+  }
+  
+  .timeline-year .section-header--below-year::before {
+    content: "";
+    position: absolute;
+    left: -1.5rem;      /* align with the vertical line */
+    top: 50%;
+    width: 12px;
+    height: 2px;
+    background: var(--color-accent-primary);
+    transform: translateY(-50%);
+  }
+  
+
+/* Theme Toggle */
+.theme-toggle {
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    padding: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all var(--transition-speed);
+}
+
+.theme-toggle:hover {
+    border-color: var(--color-accent-primary);
+    background: var(--color-highlight-primary);
+}
+
+.theme-toggle svg {
+    width: 20px;
+    height: 20px;
+    color: var(--color-text-secondary);
+}
+
+.logo-image {
+    height: 112px; /* adjust size as desired */
+    width: auto;
+    display: block;
+}
+/* ========== SECTIONS ========== */
+
+
+section {
+    padding: 4rem 0;
+    position: relative;
+}
+
+.section-header {
+    margin-bottom: 3rem;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.section-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-accent-primary), var(--color-accent-secondary));
+    border-radius: 2px;
+}
+
+.section-header p {
+    color: var(--color-text-secondary);
+    font-size: 1.1rem;
+    max-width: 700px;
+}
+/* ========= CV =============*/
+/* Ensure both columns start at the same top line */
+/* Remove global section padding for the right column inside the CV grid */
+.cv-grid > section {
+    padding: 0;             /* kills the 4rem top/bottom padding in the right column */
+  }
+  
+  /* Make sure both columns align to the top baseline */
+  .cv-grid {
+    align-items: start;     /* you already set this, keep it */
+  }
+  
+  /* (Optional) ensure the first card in the right column doesn't add extra top spacing */
+  .cv-grid > section .cv-section:first-child {
+    margin-top: 0;
+  }
+  
+  /* Contact icons row */
+  .cv-contact-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 0.8rem;
+    align-items: center;
+    justify-content: center;       /* center in the sidebar; change to 'flex-start' if preferred */
+    padding: 0;
+    margin: 0.2rem 0 0 0;
+    list-style: none;
+  }
+  
+ 
+/* ========== CARDS ========== */
+
+.card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: all var(--transition-speed);
+}
+
+.card:hover {
+    border-color: var(--color-accent-primary);
+    background: var(--color-surface-elevated);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px var(--color-highlight-primary);
+}
+
+.card.secondary-accent:hover {
+    border-color: var(--color-accent-secondary);
+    box-shadow: 0 8px 24px var(--color-highlight-secondary);
+}
+.talk-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
+  
+  .talk-card {
+    position: relative;
+    height: 400px;
+    border-radius: 10px;
+    overflow: hidden;
+    color: #fff;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    transition: transform 0.2s ease;
+  }
+  
+  .talk-card:hover { transform: scale(1.02); }
+  
+  .talk-card-overlay {
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
+    padding: 1rem;
+  }
+  
+  .talk-card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+  }
+  
+  .talk-card-subtitle {
+    font-size: 1rem;
+    opacity: 0.85;
+    margin-top: 0.3rem;
+  }
+  
+/* ========== BUTTONS & LINKS ========== */
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all var(--transition-speed);
+    cursor: pointer;
+    border: none;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+}
+
+.btn-primary {
+    background: var(--color-accent-primary);
+    color: white;
+    border: 1px solid var(--color-accent-primary);
+}
+
+.btn-primary:hover {
+    background: var(--color-accent-secondary);
+    border-color: var(--color-accent-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--color-highlight-secondary);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+    border-color: var(--color-accent-primary);
+    color: var(--color-accent-primary);
+    background: var(--color-highlight-primary);
+}
+
+/* ========== TAGS ========== */
+
+.tag {
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.tag-primary {
+    background: var(--color-highlight-primary);
+    border: 1px solid var(--color-accent-primary);
+    color: var(--color-accent-primary);
+}
+
+.tag-secondary {
+    background: var(--color-highlight-secondary);
+    border: 1px solid var(--color-accent-secondary);
+    color: var(--color-accent-secondary);
+}
+.tag-tertiary {
+    background: rgba(59, 130, 246, 0.12);
+    border: 1px solid #3b82f6;
+    color: #3b82f6;
+  }
+
+/* ========== PROFILE IMAGE ========== */
+
+.profile-image {
+    width: 300px;
+    height: 300px;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transition: all var(--transition-speed);
+}
+
+.profile-image:hover {
+    transform: translateY(-8px) rotate(2deg);
+    box-shadow: 0 30px 80px var(--color-highlight-primary);
+    border-color: var(--color-accent-secondary);
+}
+
+
+/* ========== GRADIENTS ========== */
+
+.gradient-text {
+    background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent-primary) 50%, var(--color-accent-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.gradient-bg {
+    background: linear-gradient(135deg, var(--color-accent-primary) 0%, var(--color-accent-secondary) 100%);
+}
+
+/* ========== FOOTER ========== */
+
+footer {
+    border-top: 1px solid var(--color-border);
+    padding: 3rem 0;
+    text-align: center;
+    color: var(--color-text-secondary);
+}
+
+footer a {
+    color: var(--color-accent-primary);
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: var(--color-accent-secondary);
+}
+
+/* ========== RESPONSIVE ========== */
+
+@media (max-width: 968px) {
+    .nav-links li:not(:last-child) {
+        display: none;
+    }
+    
+    .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .profile-image {
+        width: 200px;
+        height: 200px;
+    }
+    
+    section {
+        padding: 4rem 0;
+    }
+}
+
+@media (max-width: 640px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .nav-content {
+        padding: 1rem;
+    }
+}
+
+/* ========== ANIMATIONS ========== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out both;
+}
+
+/* Staggered animations */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }

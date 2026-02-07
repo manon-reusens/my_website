@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Teaching — Manon Reusens</title>
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="color-scheme" content="dark light" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <nav>
+    <div class="nav-content">
+      <a class="logo" href="index.html"><img src="mr-logo.png" alt="MR logo" class="logo-image"></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="talks.html">Talks</a></li>
+        <li><a class="active" href="teaching.html">Teaching</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li>
+          <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+            <svg id="icon-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+            <svg id="icon-sun" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6.76 4.84l-1.8-1.79L3.17 4.84 4.96 6.63 6.76 4.84zM1 13h3v-2H1v2zm10 10h2v-3h-2v3zM4.22 19.78l1.79-1.79-1.79-1.79-1.79 1.79 1.79 1.79zM13 1h-2v3h2V1zm7.83 3.84l-1.79-1.79-1.79 1.79 1.79 1.79 1.79-1.79zM20 11v2h3v-2h-3zm-2.76 8.16l1.8 1.79 1.79-1.79-1.79-1.79-1.8 1.79z"/></svg>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container" style="padding-top:7rem">
+    <section class="section-header">
+      <h2>Teaching</h2>
+      <p>Current courses, guest lectures, and assistantships.</p>
+    </section>
+
+    <section class="fade-in-up">
+      <div class="section-header"><h3>Current</h3></div>
+      <div id="teachCurrent" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:1rem"></div>
+    </section>
+
+    <section class="fade-in-up">
+      <div class="section-header"><h3>Guest Lectures</h3></div>
+      <div id="teachGuest" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:1rem"></div>
+    </section>
+
+    <section class="fade-in-up">
+      <div class="section-header"><h3>Assistantships</h3></div>
+      <div id="teachAssist" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:1rem"></div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <p>&copy; <span id="year"></span> Manon Reusens</p>
+  </footer>
+
+  <script src="teaching-data.js"></script>
+  <script>
+    (function theme(){
+      const root=document.documentElement, t=localStorage.getItem('theme');
+      if(t) root.setAttribute('data-theme', t);
+      const toggle=document.getElementById('themeToggle'),
+            moon=document.getElementById('icon-moon'), sun=document.getElementById('icon-sun');
+      const upd=()=>{const d=root.getAttribute('data-theme')==='dark'; moon.style.display=d?'none':'block'; sun.style.display=d?'block':'none';};
+      upd(); toggle.addEventListener('click',()=>{const next=root.getAttribute('data-theme')==='dark'?'light':'dark'; root.setAttribute('data-theme',next); localStorage.setItem('theme',next); upd();});
+    })();
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function card(obj, accent='primary'){
+      const div = document.createElement('article');
+      div.className = 'card';
+      const period = obj.endYear ? `${obj.startYear}–${obj.endYear}` : `${obj.startYear}–present`;
+      div.innerHTML = `
+        <div class="tag tag-${accent}" style="margin-bottom:0.6rem">${obj.level || obj.role || ''}</div>
+        <h3 style="margin:0">${obj.course || obj.title}</h3>
+        <p style="color:var(--color-text-secondary); margin:0.2rem 0 0.6rem 0">${obj.institution || ''}${obj.year ? ' — ' + obj.year : ''}</p>
+        ${obj.ects ? `<p style="margin:0 0 0.4rem 0"><strong>ECTS:</strong> ${obj.ects}</p>` : ``}
+        ${obj.students ? `<p style="margin:0 0 0.4rem 0"><strong>Students:</strong> ${obj.students}</p>` : ``}
+        ${obj.description ? `<p style="margin:0 0 0.6rem 0">${obj.description}</p>` : ``}
+        ${Array.isArray(obj.responsibilities) ? `<ul style="margin:0; padding-left:1.2rem">${obj.responsibilities.map(r=>`<li>${r}</li>`).join('')}</ul>` : ``}
+        ${obj.startYear ? `<p style="margin-top:0.6rem; color:var(--color-text-secondary)">${period}</p>` : ``}
+      `;
+      return div;
+    }
+
+    (function render(){
+      const cwrap = document.getElementById('teachCurrent');
+      TeachingAPI.getCurrent().forEach(t => cwrap.appendChild(card(t,'primary')));
+
+      const gwrap = document.getElementById('teachGuest');
+      TeachingAPI.getGuestLectures()
+        .sort((a,b)=>b.year-a.year)
+        .forEach(t => gwrap.appendChild(card(t,'secondary')));
+
+      const awrap = document.getElementById('teachAssist');
+      TeachingAPI.getAssistantships()
+        .sort((a,b)=>b.startYear-a.startYear)
+        .forEach(t => awrap.appendChild(card(t,'primary')));
+    })();
+  </script>
+</body>
+</html>

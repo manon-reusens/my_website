@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Talks — Manon Reusens</title>
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="color-scheme" content="dark light" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <nav>
+    <div class="nav-content">
+      <a class="logo" href="index.html"><img src="mr-logo.png" alt="MR logo" class="logo-image"></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a class="active" href="talks.html">Talks</a></li>
+        <li><a href="teaching.html">Teaching</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li>
+          <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+            <svg id="icon-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+            <svg id="icon-sun" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6.76 4.84l-1.8-1.79L3.17 4.84 4.96 6.63 6.76 4.84zM1 13h3v-2H1v2zm10 10h2v-3h-2v3zM4.22 19.78l1.79-1.79-1.79-1.79-1.79 1.79 1.79 1.79zM13 1h-2v3h2V1zm7.83 3.84l-1.79-1.79-1.79 1.79 1.79 1.79 1.79-1.79zM20 11v2h3v-2h-3zm-2.76 8.16l1.8 1.79 1.79-1.79-1.79-1.79-1.8 1.79z"/></svg>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container" style="padding-top:7rem">
+    <section class="section-header">
+      <h2>Talks</h2>
+      <p>Keynotes and invited talks first, followed by a chronological timeline.</p>
+    </section>
+
+    <!-- BEGIN: keynote block (copied from index) -->
+    <section id="keynoteBlock" class="fade-in-up" style="display:none">
+      <div class="card secondary-accent">
+        <div class="section-header" style="margin-bottom:1rem">
+          <h2>Available for Keynote Speaking</h2>
+        </div>
+        <p id="keynoteDesc" style="margin-bottom:1rem"></p>
+        <ul id="keynoteTopics" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:0.8rem; list-style:none; padding:0"></ul>
+        <div style="margin-top:1rem">
+          <a id="keynoteCta" class="btn btn-primary" href="#contact">Book a Keynote</a>
+        </div>
+      </div>
+    </section>
+    <!-- END: keynote block -->
+    <!-- Keynotes -->
+    <!-- <section id="keynotesWrap" class="fade-in-up" style="display:none">
+      <div class="section-header" style="margin-bottom:1rem">
+        <h3>Keynotes & Invited Talks</h3>
+      </div>
+      <div id="keynotesGrid" class="talk-card-grid"></div>
+    </section> -->
+
+    <!-- Timeline by year -->
+    <section id="timeline" class="fade-in-up"></section>
+  </main>
+
+  <footer class="container">
+    <p>&copy; <span id="year"></span> Manon Reusens</p>
+  </footer>
+
+  <script src="talks-data.js"></script>
+  <script src="config.js"></script>
+  <script>
+    (function theme(){
+      const root=document.documentElement, t=localStorage.getItem('theme');
+      if(t) root.setAttribute('data-theme', t);
+      const toggle=document.getElementById('themeToggle'),
+            moon=document.getElementById('icon-moon'), sun=document.getElementById('icon-sun');
+      const upd=()=>{const d=root.getAttribute('data-theme')==='dark'; moon.style.display=d?'none':'block'; sun.style.display=d?'block':'none';};
+      upd(); toggle.addEventListener('click',()=>{const next=root.getAttribute('data-theme')==='dark'?'light':'dark'; root.setAttribute('data-theme',next); localStorage.setItem('theme',next); upd();});
+    })();
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+
+    (function renderKeynotes(){
+      const k = websiteConfig.keynote || {};
+      if (!k.enabled) return;
+      const block = document.getElementById('keynoteBlock');
+      if (!block) return;
+      block.style.display = 'block';
+      document.getElementById('keynoteDesc').textContent = k.description || '';
+      const ul = document.getElementById('keynoteTopics');
+      (k.topics || []).forEach(t => {
+        const li = document.createElement('li');
+        li.className = 'card';
+        li.innerHTML = `<strong>${t.icon || ''} ${t.title}</strong><br/><span style="color:var(--color-text-secondary)">${t.description}</span>`;
+        ul.appendChild(li);
+      });
+      const cta = document.getElementById('keynoteCta');
+      cta.textContent = k.contactButtonText || 'Contact';
+      cta.href = websiteConfig.personal?.contact?.email
+        ? `mailto:${websiteConfig.personal.contact.email}`
+        : '#';
+    })();
+  // Timeline — talks first, year header underneath
+    (function renderTimeline(){
+      const byYear = TalksAPI.groupByYear({ excludeIds: ['custom-topics'] });
+      const years = Object.keys(byYear).sort((a,b)=> b - a);
+      const container = document.getElementById('timeline');
+
+      /* -------------------------------
+        0) Add "Today" at the top
+        (no talks, just a label)
+      --------------------------------*/
+      const todaySection = document.createElement('section');
+      todaySection.className = 'fade-in-up timeline-year';
+
+      todaySection.innerHTML = `
+        <div class="section-header section-header--below-year">
+          <h3>Today</h3>
+        </div>
+      `;
+
+      container.appendChild(todaySection);
+
+      /* -------------------------------
+        1) Now render each year normally
+      --------------------------------*/
+      years.forEach(y => {
+        const section = document.createElement('section');
+        section.className = 'fade-in-up timeline-year';
+
+        // Talks first
+        const list = document.createElement('div');
+        list.style.cssText = 'display:flex; flex-direction:column; gap:1.5rem;';
+
+        (byYear[y] || [])
+          .sort((a,b)=> new Date(b.date) - new Date(a.date))
+          .forEach(t => {
+            const el = document.createElement('a');
+            el.className = 'card timeline-item';
+            el.href = `talk.html?id=${t.id}`;
+            el.setAttribute('aria-label', `Open talk: ${t.title}`);
+
+            // 🔽 Prevent underlines & keep your card colors
+            el.style.textDecoration = 'none';
+            el.style.color = 'inherit';
+
+            el.innerHTML = `
+              <div class="tag tag-primary" style="margin-bottom:0.6rem">
+                ${t.type} — ${new Date(t.date).toLocaleDateString(undefined,{month:'short', day:'2-digit'})}
+              </div>
+              <h3 style="margin:0">${t.title}</h3>
+              <p style="color:var(--color-text-secondary); margin:0.2rem 0 0.6rem 0">
+                ${t.event} — ${t.location}
+              </p>
+              <p style="margin:0 0 0.8rem 0">${t.description}</p>
+            `;
+            list.appendChild(el);
+          });
+
+        // Year header BELOW
+        const yearHeader = document.createElement('div');
+        yearHeader.className = 'section-header section-header--below-year';
+        yearHeader.innerHTML = `<h3>${y}</h3>`;
+
+        section.appendChild(list);
+        section.appendChild(yearHeader);
+        container.appendChild(section);
+      });
+    })();
+    (function positionTimelineLine() {
+      const timeline = document.getElementById('timeline');
+      if (!timeline) return;
+
+      // Always anchor the line to the Today header
+      const todayHeader = timeline.querySelector('.timeline-year:first-of-type .section-header');
+      if (!todayHeader) return;
+
+      const timelineRect = timeline.getBoundingClientRect();
+      const headerRect   = todayHeader.getBoundingClientRect();
+
+      const offset = Math.max(0, headerRect.top - timelineRect.top);
+
+      timeline.style.setProperty('--timeline-start', offset + 'px');
+    })();
+
+    window.addEventListener('resize', () => {
+      const timeline = document.getElementById('timeline');
+      const todayHeader = timeline?.querySelector('.timeline-year:first-of-type .section-header');
+      if (!timeline || !todayHeader) return;
+
+      const timelineRect = timeline.getBoundingClientRect();
+      const headerRect   = todayHeader.getBoundingClientRect();
+
+      const offset = Math.max(0, headerRect.top - timelineRect.top);
+      timeline.style.setProperty('--timeline-start', offset + 'px');
+    });
+
+    // keep it accurate on resize
+    window.addEventListener('resize', () => {
+    const timeline = document.getElementById('timeline');
+    const todayHeader = timeline?.querySelector('.timeline-year:first-of-type .section-header');
+    if (!timeline || !todayHeader) return;
+
+    const timelineRect = timeline.getBoundingClientRect();
+    const headerRect = todayHeader.getBoundingClientRect();
+    const offset = Math.max(0, headerRect.top - timelineRect.top);
+
+    timeline.style.setProperty('--timeline-start', offset + 'px');
+});
+
+  </script>
+</body>
+</html>

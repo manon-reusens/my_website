@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CV — Manon Reusens</title>
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="color-scheme" content="dark light" />
+  <style>
+    .cv-grid { display:grid; grid-template-columns: 320px 1fr; gap:2rem; }
+    @media (max-width: 968px){ .cv-grid { grid-template-columns: 1fr; } }
+    .cv-section h3 { margin:0 0 .4rem 0; }
+    .cv-item { margin: .6rem 0 1rem 0; }
+    .muted { color: var(--color-text-secondary); }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <nav>
+    <div class="nav-content">
+      <a class="logo" href="index.html"><img src="mr-logo.png" alt="MR logo" class="logo-image"></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="talks.html">Talks</a></li>
+        <li><a href="teaching.html">Teaching</a></li>
+        <li><a class="active" href="cv.html">CV</a></li>
+        <li>
+          <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+            <svg id="icon-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+            <svg id="icon-sun" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6.76 4.84l-1.8-1.79L3.17 4.84 4.96 6.63 6.76 4.84zM1 13h3v-2H1v2zm10 10h2v-3h-2v3zM4.22 19.78l1.79-1.79-1.79-1.79-1.79 1.79 1.79 1.79zM13 1h-2v3h2V1zm7.83 3.84l-1.79-1.79-1.79 1.79 1.79 1.79 1.79-1.79zM20 11v2h3v-2h-3zm-2.76 8.16l1.8 1.79 1.79-1.79-1.79-1.79-1.8 1.79z"/></svg>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container" style="padding-top:7rem">
+    <section class="section-header">
+      <h2>Curriculum Vitae</h2>
+    </section>
+
+    <section class="cv-grid fade-in-up">
+      <!-- Sidebar -->
+      <aside class="card" style="align-self:start">
+        <div style="display:flex; flex-direction:column; align-items:center; text-align:center; gap:0.8rem">
+          <img id="cvImage" class="profile-image" style="width:200px; height:200px" src="profile.jpg" alt="Portrait of Manon Reusens" />
+          <div>
+            <h3 id="cvName" style="margin:0">Manon Reusens</h3>
+            <p id="cvTitle" class="muted" style="margin:0.2rem 0 0 0"></p>
+          </div>
+        </div>
+        <hr style="margin:1rem 0; border-color:var(--color-border)"/>
+        <div>
+          <h4>Contact</h4>
+          <ul id="cvContactIcons" class="cv-contact-icons"></ul>
+          <ul id="cvContact" style="list-style:none; padding:0; margin:0"></ul> <!-- kept for fallback; hidden via CSS -->
+        </div>
+        <hr style="margin:1rem 0; border-color:var(--color-border)"/>
+        <div>
+          <h4>Research Focus</h4>
+          <ul id="cvFocus" style="list-style:none; padding:0; margin:0"></ul>
+        </div>
+        <hr style="margin:1rem 0; border-color:var(--color-border)"/>
+        <div>
+          <h4>Technical Skills</h4>
+          <ul id="cvSkills" style="list-style:none; padding:0; margin:0"></ul>
+        </div>
+        <hr style="margin:1rem 0; border-color:var(--color-border)"/>
+        <div>
+          <h4>Languages</h4>
+          <ul id="cvLangs" style="list-style:none; padding:0; margin:0"></ul>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <section>
+        <div class="cv-section card">
+          <h3>Education</h3>
+          <div id="cvEducation"></div>
+        </div>
+
+        <div class="cv-section card" style="margin-top:1rem">
+          <h3>Positions</h3>
+          <div id="cvPositions"></div>
+        </div>
+
+        <div class="cv-section card" style="margin-top:1rem">
+          <h3>Selected Publications</h3>
+          <div id="cvPubs"></div>
+        </div>
+
+        <div class="cv-section card" style="margin-top:1rem">
+          <h3>Talks (Recent)</h3>
+          <div id="cvTalks"></div>
+        </div>
+
+        <div class="cv-section card" style="margin-top:1rem">
+          <h3>Teaching</h3>
+          <div id="cvTeach"></div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="container">
+    <p>&copy; <span id="year"></span> Manon Reusens</p>
+  </footer>
+
+  <!-- DATA & LOGIC -->
+  <script src="config.js"></script>
+  <script src="publications-data.js"></script>
+  <script src="talks-data.js"></script>
+  <script src="teaching-data.js"></script>
+  <script>
+    (function theme(){
+      const root=document.documentElement, t=localStorage.getItem('theme');
+      if(t) root.setAttribute('data-theme', t);
+      const toggle=document.getElementById('themeToggle'),
+            moon=document.getElementById('icon-moon'), sun=document.getElementById('icon-sun');
+      const upd=()=>{const d=root.getAttribute('data-theme')==='dark'; moon.style.display=d?'none':'block'; sun.style.display=d?'block':'none';};
+      upd(); toggle.addEventListener('click',()=>{const next=root.getAttribute('data-theme')==='dark'?'light':'dark'; root.setAttribute('data-theme',next); localStorage.setItem('theme',next); upd();});
+    })();
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+
+    // Sidebar
+    (function sidebar(){
+      const p = websiteConfig.personal;
+      document.getElementById('cvName').textContent = p.name;
+      document.getElementById('cvTitle').textContent = p.title || p.tagline || '';
+      document.getElementById('cvImage').src = p.profileImage || 'profile.jpg';
+
+      // --- ICON CONTACT BAR ---
+      const iconsUl = document.getElementById('cvContactIcons');
+
+      // Helper: create <li><a> with inline SVG icon
+      function iconLi(href, label, svg) {
+        if (!href) return null;
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.className = 'cv-icon-link';
+        a.href = href;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.setAttribute('aria-label', label);
+        a.innerHTML = svg;
+        li.appendChild(a);
+        return li;
+      }
+
+      // Minimal inline SVGs (no external assets needed)
+      const SVG = {
+      mail: `
+    <svg viewBox="0 0 24 24" aria-hidden="true" role="img" focusable="false">
+      <path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+    </svg>`,
+
+      /* LinkedIn — glyph only */
+      linkedin: `
+    <svg viewBox="0 0 24 24" aria-hidden="true" role="img" focusable="false">
+      <circle cx="6.8" cy="6.5" r="1.6"/>
+      <rect x="5.8" y="9.5" width="2" height="8.5" rx="0.5"/>
+      <path d="M11 9.5h2.2v1.3h.03c.38-.76 1.35-1.42 2.67-1.42
+              2.25 0 3.5 1.38 3.5 3.86V18h-2.3v-3.93c0-1.14-.46-1.97-1.62-1.97
+              -1.1 0-1.84.77-1.84 2.06V18H11V9.5z"/>
+    </svg>`,
+
+      /* Scholar — outline cap; if you prefer pure outline, we’ll set fill:none in CSS just for this */
+      scholar: `
+    <svg viewBox="0 0 24 24" aria-hidden="true" role="img" focusable="false">
+      <path d="M12 4L3 9l9 5 9-5-9-5z"/>
+      <path d="M19.5 9.8v3.2"/>
+      <path d="M6 13.5v2.2c0 2 3.6 3.8 6 3.8s6-1.8 6-3.8v-2.2"/>
+    </svg>`,
+
+      orcid: `
+    <svg viewBox="0 0 24 24" aria-hidden="true" role="img" focusable="false">
+      <path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm-2.86 6.27h1.47v7.46H9.14zm1.2-2.02a.92.92 0 11.92.92.92.92 0 01-.92-.92zM16.9 16.1a3.19 3.19 0 01-3.34-3.41 3.22 3.22 0 013.34-3.39 3.18 3.18 0 013.32 3.39 3.14 3.14 0 01-3.32 3.41zm0-5.2a1.8 1.8 0 00-1.92 1.79 1.83 1.83 0 001.92 1.84 1.81 1.81 0 001.9-1.84 1.78 1.78 0 00-1.9-1.79z"/>
+    </svg>`,
+
+      github: `
+    <svg viewBox="0 0 24 24" aria-hidden="true" role="img" focusable="false">
+      <path d="M12 .5A11.5 11.5 0 00.5 12 11.5 11.5 0 008 23.3c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.5-1.1-1.3-1.4-1.3-1.4-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.9 1.3 3.6 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.3 11.3 0 016 0C19 4.4 20 4.7 20 4.7c.6 1.6.2 2.9.1 3.2.8.9 1.2 2 1.2 3.2 0 4.6-2.8 5.6-5.4 5.9.4.4.7 1 .7 2v2.9c0 .3.2.7.8.6A11.5 11.5 0 0023.5 12 11.5 11.5 0 0012 .5z"/>
+    </svg>`,
+
+      location: `
+    <svg viewBox="0 0 24 24" aria-hidden="true" role="img" focusable="false">
+      <path d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1114.5 9 2.5 2.5 0 0112 11.5z"/>
+    </svg>`
+    };
+
+
+      const email    = p.contact?.email ? `mailto:${p.contact.email}` : null;
+      const linkedin = p.contact?.linkedin || null;
+      const scholar  = p.contact?.scholar  || null;
+      const orcid    = p.contact?.orcid    || null;
+      const github   = p.contact?.github   || null;
+      const mapsLink = p.contact?.locationUrl || null; // optional: add this to config if you want location clickable
+
+      const iconItems = [
+        iconLi(email,   'Email',    SVG.mail),
+        iconLi(linkedin,'LinkedIn', SVG.linkedin),
+        iconLi(scholar, 'Google Scholar', SVG.scholar),
+        iconLi(orcid,   'ORCID',    SVG.orcid),
+        iconLi(github,  'GitHub',   SVG.github),
+        iconLi(mapsLink,'Location', SVG.location)
+      ].filter(Boolean);
+
+      iconItems.forEach(li => iconsUl.appendChild(li));
+
+      // Research focus, skills, languages (unchanged)
+      const ulF = document.getElementById('cvFocus');
+      (websiteConfig.personal.researchFocus || []).forEach(s=>{
+        const li=document.createElement('li'); li.textContent=s; ulF.appendChild(li);
+      });
+
+      const ulS = document.getElementById('cvSkills');
+      (websiteConfig.personal.technicalSkills || []).forEach(s=>{
+        const li=document.createElement('li'); li.textContent=s; ulS.appendChild(li);
+      });
+
+      const ulL = document.getElementById('cvLangs');
+      (websiteConfig.personal.languages || []).forEach(s=>{
+        const li=document.createElement('li'); li.textContent=`${s.language} — ${s.level}`; ulL.appendChild(li);
+      });
+    })();
+    // Education (from thesis + note)
+    (function education(){
+      const wrap = document.getElementById('cvEducation');
+      // PhD / Thesis
+      const thesis = publicationsData.find(p => p.type==='thesis');
+      if (thesis){
+        const el = document.createElement('div');
+        el.className = 'cv-item';
+        el.innerHTML = `
+          <strong>PhD in Business Economics— ${thesis.venue}</strong><br/>
+          <span class="muted">${new Date(thesis.date).getFullYear()}</span><br/>
+          ${thesis.title}<br/>
+          <i> (Co-)Supervisors: ${thesis.promotors}</i> 
+        `;
+        wrap.appendChild(el);
+      }
+      // (Extend here for MSc/BSc if desired)
+    })();
+
+    // Positions (from config positions)
+    (function positions(){
+      const wrap = document.getElementById('cvPositions');
+      (websiteConfig.personal.positions || []).forEach(p => {
+        const el = document.createElement('div');
+        el.className = 'cv-item';
+        el.innerHTML = `<strong>${p.title}</strong>`;
+        wrap.appendChild(el);
+      });
+    })();
+
+    // Selected publications (featured or 5 recent)
+    (function pubs(){
+      const wrap = document.getElementById('cvPubs');
+      let sel = publicationsData.filter(p => p.featured);
+      if (!sel.length) sel = PublicationsAPI.getRecent(5);
+      sel.forEach(p => {
+        const el = document.createElement('div');
+        el.className = 'cv-item';
+        el.innerHTML = `
+          <strong>${p.title}</strong><br/>
+          <span class="muted">${p.authors.join(', ')} — ${p.venue} (${p.year})</span>
+        `;
+        wrap.appendChild(el);
+      });
+    })();
+
+    // Talks (recent 5)
+    (function talks(){
+      const wrap = document.getElementById('cvTalks');
+      TalksAPI.getRecent(5,{ excludeIds: ['custom-topics'] }).forEach(t => {
+        const el = document.createElement('div');
+        el.className = 'cv-item';
+        el.innerHTML = `
+          <strong>${t.title}</strong><br/>
+          <span class="muted">${t.type} — ${t.event} — ${new Date(t.date).toLocaleDateString(undefined,{year:'numeric', month:'short'})}</span>
+        `;
+        wrap.appendChild(el);
+      });
+    })();
+
+    // Teaching (compact)
+    (function teach(){
+      const wrap = document.getElementById('cvTeach');
+      TeachingAPI.getCurrent().forEach(t => {
+        const el = document.createElement('div');
+        el.className = 'cv-item';
+        const end = t.endYear ? t.endYear : 'present';
+        el.innerHTML = `
+          <strong>${t.role} — ${t.course}</strong><br/>
+          <span class="muted">${t.institution} — ${t.startYear}–${end}</span>
+        `;
+        wrap.appendChild(el);
+      });
+      TeachingAPI.getGuestLectures().slice(0,3).forEach(t => {
+        const el = document.createElement('div');
+        el.className = 'cv-item';
+        el.innerHTML = `
+          <strong>Guest Lecture — ${t.course}</strong><br/>
+          <span class="muted">${t.institution} — ${t.year}</span>
+        `;
+        wrap.appendChild(el);
+      });
+    })();
+  </script>
+</body>
+</html>

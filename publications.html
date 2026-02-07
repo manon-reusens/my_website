@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Publications — Manon Reusens</title>
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="color-scheme" content="dark light" />
+  <style>
+    /* small layout helpers */
+    .publication-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-top: .6rem;
+    }
+    .tag-label {
+      font-size: .85rem;
+      color: var(--color-text-secondary);
+      margin: .6rem 0 .2rem 0;
+      display: block;
+    }
+
+    /* Elegant button filter (matching your existing theme variables) */
+    .filter-btn {
+      padding: 0.6rem 1.2rem;
+      background: var(--color-surface-elevated);
+      color: var(--color-text-secondary);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+    .filter-btn:hover {
+      border-color: var(--color-accent-primary);
+      color: var(--color-accent-primary);
+    }
+    .filter-btn.active {
+      background: var(--color-accent-primary);
+      color: white;
+      border-color: var(--color-accent-primary);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-content">
+      <a class="logo" href="index.html"><img src="mr-logo.png" alt="MR logo" class="logo-image"></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a class="active" href="publications.html">Publications</a></li>
+        <li><a href="talks.html">Talks</a></li>
+        <li><a href="teaching.html">Teaching</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li>
+          <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+            <svg id="icon-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+            <svg id="icon-sun" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6.76 4.84l-1.8-1.79L3.17 4.84 4.96 6.63 6.76 4.84zM1 13h3v-2H1v2zm10 10h2v-3h-2v3zM4.22 19.78l1.79-1.79-1.79-1.79-1.79 1.79 1.79 1.79zM13 1h-2v3h2V1zm7.83 3.84l-1.79-1.79-1.79 1.79 1.79 1.79 1.79-1.79zM20 11v2h3v-2h-3zm-2.76 8.16l1.8 1.79 1.79-1.79-1.79-1.79-1.8 1.79z"/></svg>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="container" style="padding-top:7rem">
+    <section class="section-header">
+      <h2>Publications</h2>
+      <p>
+        Research at the intersection of Responsible AI, bias mitigation, and practical LLM applications
+      </p>
+    
+      <div id="pubStats" style="
+          display:flex; 
+          justify-content:center; 
+          gap:3rem; 
+          flex-wrap:wrap;
+          margin-top:1.5rem;
+        "></div>
+    </section>
+
+    <!-- FILTER BAR — Elegant Button Style -->
+    <section class="card fade-in-up" style="text-align:center; padding:1.5rem;">
+      <div id="pubFilterBar" style="
+        display:flex;
+        justify-content:center;
+        flex-wrap:wrap;
+        gap:0.8rem;
+      ">
+        <button class="filter-btn active" data-type="all">All</button>
+        <button class="filter-btn" data-type="journal">Journal</button>
+        <button class="filter-btn" data-type="conference">Conference</button>
+        <button class="filter-btn" data-type="preprint">Preprint</button>
+        <button class="filter-btn" data-type="thesis">Thesis</button>
+      </div>
+    </section>
+
+    <!-- PUBLICATION GRID -->
+    <section id="pubList" style="margin-top:1.2rem; 
+      display:grid; 
+      grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); 
+      gap:1rem;">
+    </section>
+  </main>
+
+  <footer class="container">
+    <p>&copy; <span id="year"></span> Manon Reusens</p>
+  </footer>
+
+  <!-- DATA FILES (order matters) -->
+  <script src="config.js"></script>
+  <script src="publications-data.js"></script>
+
+  <!-- PAGE LOGIC -->
+  <script>
+    /* -------------------- THEME SYSTEM -------------------- */
+    (function initTheme(){
+      const root=document.documentElement;
+      const saved=localStorage.getItem("theme");
+      if(saved) root.setAttribute("data-theme", saved);
+
+      const moon=document.getElementById("icon-moon");
+      const sun=document.getElementById("icon-sun");
+      const toggle=document.getElementById("themeToggle");
+
+      function updateIcons(){
+        const dark = root.getAttribute("data-theme")==="dark";
+        moon.style.display = dark ? "none" : "block";
+        sun.style.display  = dark ? "block" : "none";
+      }
+      updateIcons();
+
+      toggle.addEventListener("click", ()=>{
+        const next = root.getAttribute("data-theme")==="dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        localStorage.setItem("theme", next);
+        updateIcons();
+      });
+    })();
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    /* -------------------- STATS HEADER (counts) -------------------- */
+    (function renderStats() {
+      const total = publicationsData.length;
+      const journals = publicationsData.filter(p => p.type === "journal").length;
+      const conferences = publicationsData.filter(p => p.type === "conference").length;
+
+      document.getElementById("pubStats").innerHTML = `
+        <div style="text-align:center;">
+          <div style="font-size:2rem; font-weight:700; color:var(--color-accent-primary);">${total}</div>
+          <div style="color:var(--color-text-secondary);">Publications</div>
+        </div>
+
+        <div style="text-align:center;">
+          <div style="font-size:2rem; font-weight:700; color:var(--color-accent-primary);">${conferences}</div>
+          <div style="color:var(--color-text-secondary);">Conference Papers</div>
+        </div>
+
+        <div style="text-align:center;">
+          <div style="font-size:2rem; font-weight:700; color:var(--color-accent-primary);">${journals}</div>
+          <div style="color:var(--color-text-secondary);">Journal Articles</div>
+        </div>
+      `;
+    })();
+
+    /* -------------------- RENDER HELPER -------------------- */
+    function renderCards(list){
+      const wrap = document.getElementById("pubList");
+      wrap.innerHTML = "";
+
+      list.forEach(p=>{
+        const paperTags = Array.isArray(p.tags) ? p.tags : [];
+        const cats = Array.isArray(p.categories) ? p.categories : [];
+
+        const card = document.createElement("article");
+        card.className="card";
+
+        card.innerHTML = `
+          <div class="tag tag-primary" 
+               style="margin-bottom:0.6rem">
+            ${p.venueType} — ${p.year}
+          </div>
+
+          <h3 style="margin:0 0 0.4rem 0">${p.title}</h3>
+
+          <p style="color:var(--color-text-secondary); margin:0.2rem 0 0.6rem 0">
+            ${p.authors.join(", ")}
+          </p>
+
+          <p style="margin:0 0 0.8rem 0">${p.description}</p>
+
+          ${paperTags.length ? `
+            <span class="tag-label">Tags</span>
+            <div class="publication-tags">
+              ${paperTags.map(t => `<span class="tag tag-secondary">${t}</span>`).join("")}
+            </div>
+          ` : ``}
+
+          ${cats.length ? `
+            <span class="tag-label">Categories</span>
+            <div class="publication-tags">
+              ${cats.map(c => `<span class="tag tag-secondary">${c}</span>`).join("")}
+            </div>
+          ` : ``}
+
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:.8rem">
+            ${p.links?.paper ? `<a class="btn btn-secondary" href="${p.links.paper}" target="_blank" rel="noopener">Paper</a>` : ``}
+            ${p.links?.arxiv ? `<a class="btn btn-secondary" href="${p.links.arxiv}" target="_blank" rel="noopener">arXiv</a>` : ``}
+          </div>
+        `;
+
+        wrap.appendChild(card);
+      });
+    }
+
+    /* -------------------- FILTER (buttons) -------------------- */
+    function applyFilter(type){
+      let list = PublicationsAPI.getSortedByDate();
+      if (type && type !== "all") list = list.filter(p => p.type === type);
+      renderCards(list);
+    }
+
+    // hook up buttons
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        applyFilter(btn.dataset.type);
+      });
+    });
+
+    // initial render: show ALL
+    applyFilter("all");
+  </script>
+</body>
+</html>

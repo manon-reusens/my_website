@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manon Reusens — Home</title>
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="color-scheme" content="dark light" />
+</head>
+<body>
+  <!-- Grain overlay -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-content">
+      <a class="logo" href="index.html"><img src="mr-logo.png" alt="MR logo" class="logo-image"></a>
+      <ul class="nav-links">
+        <li><a class="active" href="index.html">Home</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="talks.html">Talks</a></li>
+        <li><a href="teaching.html">Teaching</a></li>
+        <li><a href="cv.html">CV</a></li>
+        <li>
+          <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+            <svg id="icon-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+            <svg id="icon-sun" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6.76 4.84l-1.8-1.79L3.17 4.84 4.96 6.63 6.76 4.84zM1 13h3v-2H1v2zm10 10h2v-3h-2v3zM4.22 19.78l1.79-1.79-1.79-1.79-1.79 1.79 1.79 1.79zM13 1h-2v3h2V1zm7.83 3.84l-1.79-1.79-1.79 1.79 1.79 1.79 1.79-1.79zM20 11v2h3v-2h-3zm-2.76 8.16l1.8 1.79 1.79-1.79-1.79-1.79-1.8 1.79z"/></svg>
+            <span id="themeLabel" style="display:none">Toggle Theme</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="container" style="padding-top:7rem">
+    <section class="fade-in-up">
+      <div style="display:flex; gap:2.5rem; align-items:center; flex-wrap:wrap">
+        <img id="profileImage" class="profile-image stagger-1" src="profile.JPG" alt="Portrait of Manon Reusens" />
+        <div class="stagger-2">
+          <h1 class="gradient-text" id="heroName" style="font-size:2.6rem; line-height:1.2">Manon Reusens</h1>
+          <p id="heroTagline" style="font-size:1.15rem; color:var(--color-text-secondary); margin-top:0.3rem"></p>
+          <div id="heroPositions" style="margin-top:1rem; display:flex; gap:0.6rem; flex-wrap:wrap"></div>
+          <div style="margin-top:1.2rem; display:flex; gap:0.6rem; flex-wrap:wrap">
+            <a id="ctaEmail" class="btn btn-primary" href="#" target="_blank" rel="noopener">Contact</a>
+            <a class="btn btn-secondary" href="cv.html">View CV</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <!-- NEWS -->
+  <main class="container">
+    <section class="fade-in-up stagger-2">
+      <div class="section-header">
+        <h2>Latest News</h2>
+      </div>
+      <div id="newsList" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:1.2rem"></div>
+    </section>
+
+    <!-- FEATURED PUBLICATIONS -->
+    <section class="fade-in-up stagger-3">
+      <div class="section-header">
+        <h2>Featured Publications</h2>
+        <p>Highlights selected from recent work.</p>
+      </div>
+      <div id="featuredPubs" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:1.2rem"></div>
+      <div style="margin-top:1rem">
+        <a class="btn btn-secondary" href="publications.html">See all publications</a>
+      </div>
+    </section>
+
+    <!-- KEYNOTE SPEAKING -->
+    <section id="keynoteBlock" class="fade-in-up stagger-4" style="display:none">
+      <div class="card secondary-accent">
+        <div class="section-header" style="margin-bottom:1rem">
+          <h2>Available for Keynote Speaking</h2>
+        </div>
+        <p id="keynoteDesc" style="margin-bottom:1rem"></p>
+        <ul id="keynoteTopics" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:0.8rem; list-style:none; padding:0"></ul>
+        <div style="margin-top:1rem">
+          <a id="keynoteCta" class="btn btn-primary" href="#contact">Book a Keynote</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <p>&copy; <span id="year"></span> Manon Reusens.</p>
+  </footer>
+
+  <!-- DATA & LOGIC: order matters -->
+  <script src="config.js"></script>
+  <script src="publications-data.js"></script>
+  <script src="talks-data.js"></script>
+  <script src="teaching-data.js"></script>
+  <script src="news-generator.js"></script>
+  <script>
+    // Theme handling
+    (function initTheme(){
+      const root = document.documentElement;
+      const stored = localStorage.getItem('theme');
+      if (stored) root.setAttribute('data-theme', stored);
+      const toggle = document.getElementById('themeToggle');
+      const iconSun = document.getElementById('icon-sun');
+      const iconMoon = document.getElementById('icon-moon');
+      const updateIcons = () => {
+        const isDark = root.getAttribute('data-theme') === 'dark';
+        iconMoon.style.display = isDark ? 'none' : 'block';
+        iconSun.style.display = isDark ? 'block' : 'none';
+      };
+      updateIcons();
+      toggle.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        updateIcons();
+      });
+    })();
+
+    // Hero content from config
+    (function initHero(){
+      const p = websiteConfig.personal;
+      document.getElementById('heroName').textContent = p.name;
+      document.getElementById('heroTagline').textContent = p.tagline;
+      document.getElementById('profileImage').src = p.profileImage || 'profile.jpg';
+      // positions
+      const posWrap = document.getElementById('heroPositions');
+      p.positions.forEach(item => {
+        const span = document.createElement('span');
+        span.className = 'tag tag-primary';
+        span.textContent = item.title;
+        posWrap.appendChild(span);
+      });
+      // contact
+      const mail = (p.contact && p.contact.email) ? `mailto:${p.contact.email}` : '#';
+      document.getElementById('ctaEmail').href = mail;
+    })();
+
+    // News
+    (function renderNews(){
+      const news = NewsGenerator.getRecent(12, {excludeTalkIds: ['custom-topics']}).slice(0, 4);
+      const wrap = document.getElementById('newsList');
+      news.forEach(n => {
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="tag ${n.type==='publication' ? 'tag-primary' : 'tag-secondary'}" style="margin-bottom:0.6rem">${n.date}</div>
+          <h3 style="margin:0 0 0.4rem 0">${n.title}</h3>
+          <p style="color:var(--color-text-secondary); margin:0 0 0.8rem 0">${n.description || ''}</p>
+          ${n.link ? `<a class="btn btn-secondary" href="${n.link}" target="_blank" rel="noopener">View</a>` : ``}
+        `;
+        wrap.appendChild(card);
+      });
+    })();
+
+    // Featured publications
+    (function renderFeatured(){
+      const pubs = PublicationsAPI.getFeatured();
+      const wrap = document.getElementById('featuredPubs');
+      pubs.forEach(p => {
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="tag tag-primary" style="margin-bottom:0.6rem">${p.venueType}</div>
+          <h3 style="margin:0 0 0.4rem 0">${p.title}</h3>
+          <p style="color:var(--color-text-secondary); margin:0.2rem 0 0.6rem 0">${p.authors.join(', ')}</p>
+          <p style="margin:0 0 0.8rem 0">${p.description}</p>
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap">
+            ${p.links?.paper ? `<a class="btn btn-secondary" href="${p.links.paper}" target="_blank" rel="noopener">Paper</a>` : ``}
+            ${p.links?.arxiv ? `<a class="btn btn-secondary" href="${p.links.arxiv}" target="_blank" rel="noopener">arXiv</a>` : ``}
+          </div>
+        `;
+        wrap.appendChild(card);
+      });
+    })();
+
+    // Keynote block
+    (function renderKeynotes(){
+      const k = websiteConfig.keynote || {};
+      if (!k.enabled) return;
+      const block = document.getElementById('keynoteBlock');
+      block.style.display = 'block';
+      document.getElementById('keynoteDesc').textContent = k.description || '';
+      const ul = document.getElementById('keynoteTopics');
+      (k.topics || []).forEach(t => {
+        const li = document.createElement('li');
+        li.className = 'card';
+        li.innerHTML = `<strong>${t.icon || ''} ${t.title}</strong><br/><span style="color:var(--color-text-secondary)">${t.description}</span>`;
+        ul.appendChild(li);
+      });
+      document.getElementById('keynoteCta').textContent = k.contactButtonText || 'Contact';
+      document.getElementById('keynoteCta').href = websiteConfig.personal.contact?.email ? `mailto:${websiteConfig.personal.contact.email}` : '#';
+    })();
+  </script>
+</body>
+</html>
