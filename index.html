@@ -14,20 +14,37 @@
   <!-- NAV -->
   <nav>
     <div class="nav-content">
-      <a class="logo" href="index.html"><img src="MR-logo.png" alt="MR logo" class="logo-image"></a>
-      <ul class="nav-links">
+      <a class="logo" href="index.html">
+        <img src="MR-logo.png" alt="MR logo" class="logo-image">
+      </a>
+  
+      <!-- NEW: Hamburger toggle (mobile) -->
+      <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="primaryNav">
+        <span class="sr-only">Menu</span>
+        <!-- Hamburger icon -->
+        <svg class="icon icon-menu" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path fill="currentColor" d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/>
+        </svg>
+        <!-- Close icon -->
+        <svg class="icon icon-close" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path fill="currentColor" d="M18.3 5.71L12 12.01 5.7 5.7 4.29 7.11 10.59 13.4 4.3 19.7 5.71 21.11 12 14.82 18.29 21.1 19.7 19.69 13.41 13.4 19.71 7.1z"/>
+        </svg>
+      </button>
+  
+      <!-- Keep theme toggle visible at all sizes -->
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+        <!-- your sun/moon svgs -->
+        <svg id="icon-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <svg id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"      style="display:none">  <circle cx="12" cy="12" r="5" />  <line x1="12" y1="1" x2="12" y2="3" />  <line x1="12" y1="21" x2="12" y2="23" />  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />  <line x1="1" y1="12" x2="3" y2="12" />  <line x1="21" y1="12" x2="23" y2="12" />  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" /></svg>
+      </button>
+  
+      <!-- Primary navigation -->
+      <ul id="primaryNav" class="nav-links" hidden>
         <li><a class="active" href="index.html">Home</a></li>
         <li><a href="publications.html">Publications</a></li>
         <li><a href="talks.html">Talks</a></li>
         <li><a href="teaching.html">Teaching</a></li>
         <li><a href="cv.html">CV</a></li>
-        <li>
-          <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
-            <svg id="icon-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-            <svg id="icon-sun" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6.76 4.84l-1.8-1.79L3.17 4.84 4.96 6.63 6.76 4.84zM1 13h3v-2H1v2zm10 10h2v-3h-2v3zM4.22 19.78l1.79-1.79-1.79-1.79-1.79 1.79 1.79 1.79zM13 1h-2v3h2V1zm7.83 3.84l-1.79-1.79-1.79 1.79 1.79 1.79 1.79-1.79zM20 11v2h3v-2h-3zm-2.76 8.16l1.8 1.79 1.79-1.79-1.79-1.79-1.8 1.79z"/></svg>
-            <span id="themeLabel" style="display:none">Toggle Theme</span>
-          </button>
-        </li>
       </ul>
     </div>
   </nav>
@@ -96,6 +113,7 @@
   <script src="talks-data.js"></script>
   <script src="teaching-data.js"></script>
   <script src="news-generator.js"></script>
+  <script src="nav.js"></script>
   <script>
     // Theme handling
     (function initTheme(){

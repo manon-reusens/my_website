@@ -256,6 +256,227 @@ nav {
     width: 100%;
 }
 
+/* Ensure nav sits above the grain (your grain has z-index:100) */
+nav { z-index: 200; }
+
+/* A11y helper */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0);
+  white-space: nowrap; border: 0;
+}
+
+/* Hamburger button base */
+.nav-toggle {
+  display: none;                 /* hidden on desktop */
+  align-items: center;
+  justify-content: center;
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-elevated);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background var(--transition-speed),
+              border-color var(--transition-speed),
+              transform .15s ease;
+  margin-left: .5rem;
+}
+
+.nav-toggle:hover {
+  background: var(--color-highlight-primary);
+  border-color: var(--color-accent-primary);
+  transform: translateY(-1px);
+}
+
+/* Swap icons based on state */
+.nav-toggle .icon-close { display: none; }
+.nav-toggle[aria-expanded="true"] .icon-menu { display: none; }
+.nav-toggle[aria-expanded="true"] .icon-close { display: block; }
+
+/* Desktop keeps your current inline list */
+@media (min-width: 969px) {
+  /* Make sure desktop layout shows the inline menu as before */
+  #primaryNav {
+    position: static;
+    display: flex !important;
+    gap: 2rem;
+  }
+}
+
+/* Mobile: hamburger + slide-down menu */
+@media (max-width: 968px) {
+  .logo-image { height: 56px; }   /* optional: smaller logo on phones */
+
+  .nav-content {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto; /* logo | spacer | hamburger | theme */
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;  /* slightly tighter */
+  }
+
+  /* Show hamburger on mobile */
+  .nav-toggle { display: inline-flex; }
+
+  /* Keep theme toggle on the far right */
+  .theme-toggle { justify-self: end; }
+
+  /* Menu panel */
+  #primaryNav {
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: 0 12px 30px rgba(0,0,0,.25);
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    gap: 0.25rem;
+    transform-origin: top;
+    animation: menuIn .18s ease;
+  }
+
+  /* When hidden attribute is present, ensure it doesn't render */
+  #primaryNav[hidden] { display: none !important; }
+
+  #primaryNav li { list-style: none; }
+
+  #primaryNav a {
+    display: block;
+    padding: 0.9rem 1rem;
+    border-radius: 8px;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: 1rem;
+    line-height: 1.2;
+    transition: background .15s ease, color .15s ease;
+  }
+
+  #primaryNav a:hover,
+  #primaryNav a.active {
+    background: var(--color-highlight-primary);
+    color: var(--color-accent-primary);
+  }
+
+  /* Optional: prevent page scroll when menu is open */
+  body.no-scroll { overflow: hidden; }
+}
+
+/* Subtle slide-down */
+@keyframes menuIn {
+  from { opacity: 0; transform: scaleY(0.98); }
+  to   { opacity: 1; transform: scaleY(1); }
+}
+
+/* Safety: make sure decorative overlays don't capture taps */
+.grain { pointer-events: none; }
+
+/* Desktop layout: keep inline menu, theme toggle at far right */
+/* Desktop: links align to the right, theme toggle at the far right */
+@media (min-width: 969px) {
+    .nav-content {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding: 1.5rem 2rem;         /* keep your desktop padding */
+    }
+  
+    /* Order in the row */
+    .logo         { order: 1; }
+    .nav-links    { 
+      order: 2; 
+      display: flex !important; 
+      gap: 2rem; 
+      margin-left: auto;            /* <-- pushes links to the right side */
+      justify-content: flex-end;    /* <-- right-align the items within */
+      align-items: center;
+    }
+    .theme-toggle { 
+      order: 3; 
+      flex: 0 0 auto; 
+      margin-left: 1rem;            /* small gap between links and toggle */
+    }
+  
+    /* Make sure the desktop menu is inline (not the mobile panel style) */
+    #primaryNav { 
+      position: static; 
+      box-shadow: none; 
+      border: 0; 
+      padding: 0; 
+      animation: none; 
+      flex-direction: row; 
+    }
+  
+    /* Hide the hamburger on desktop */
+    .nav-toggle { display: none !important; }
+  }
+  
+  /* Mobile layout (keep your hamburger + slide-down panel) */
+  @media (max-width: 968px) {
+    .nav-content {
+      display: grid;
+      /* columns: logo | flexible spacer | hamburger | theme */
+      grid-template-columns: auto 1fr auto auto;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+    }
+  
+    /* Make sure buttons show on the right */
+    .nav-toggle   { display: inline-flex; grid-column: 3; justify-self: end; }
+    .theme-toggle { grid-column: 4; justify-self: end; }
+  
+    /* Optional: smaller logo on phones */
+    .logo-image { height: 56px; }
+  
+    /* Dropdown panel */
+    #primaryNav {
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      box-shadow: 0 12px 30px rgba(0,0,0,.25);
+      display: flex;
+      flex-direction: column;
+      padding: 0.5rem;
+      gap: 0.25rem;
+      transform-origin: top;
+      animation: menuIn .18s ease;
+    }
+    #primaryNav[hidden] { display: none !important; }
+  
+    #primaryNav li { list-style: none; }
+    #primaryNav a {
+      display: block;
+      padding: 0.9rem 1rem;
+      border-radius: 8px;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-size: 1rem;
+      line-height: 1.2;
+      transition: background .15s ease, color .15s ease;
+    }
+    #primaryNav a:hover,
+    #primaryNav a.active {
+      background: var(--color-highlight-primary);
+      color: var(--color-accent-primary);
+    }
+  
+    body.no-scroll { overflow: hidden; } /* optional while menu open */
+  }
+  
+  /* Subtle dropdown animation */
+  @keyframes menuIn {
+    from { opacity: 0; transform: scaleY(0.98); }
+    to   { opacity: 1; transform: scaleY(1); }
+  }
+  
+  /* Safety: nav above grain */
+  nav { z-index: 200; }
+  .grain { pointer-events: none; }
 /* Reduce spacing after keynotes */
 #keynotesWrap {
     margin-bottom: 1.25rem;
@@ -622,37 +843,6 @@ footer a {
 
 footer a:hover {
     color: var(--color-accent-secondary);
-}
-
-/* ========== RESPONSIVE ========== */
-
-@media (max-width: 968px) {
-    .nav-links li:not(:last-child) {
-        display: none;
-    }
-    
-    .section-header h2 {
-        font-size: 2rem;
-    }
-    
-    .profile-image {
-        width: 200px;
-        height: 200px;
-    }
-    
-    section {
-        padding: 4rem 0;
-    }
-}
-
-@media (max-width: 640px) {
-    .container {
-        padding: 0 1rem;
-    }
-    
-    .nav-content {
-        padding: 1rem;
-    }
 }
 
 /* ========== ANIMATIONS ========== */
