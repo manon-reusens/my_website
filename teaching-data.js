@@ -8,7 +8,7 @@ const teachingData = {
     current: [
         {
             id: "teach-2025-dbm",
-            role: "Lecturer",
+            role: " Guest Lecturer",
             course: "Principles of Database Management",
             institution: "KU Leuven, Faculty of Business and Economics",
             startYear: 2025,
