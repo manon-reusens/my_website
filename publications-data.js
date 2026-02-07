@@ -14,8 +14,8 @@ const publicationsData = [
         date: "2025-06-25",
         venue: "KU Leuven",
         venueType: "PhD Dissertation",
-        description: "Comprehensive research on identifying, measuring, and mitigating language bias in artificial intelligence systems. This dissertation provides theoretical frameworks and practical methodologies for developing more equitable multilingual AI systems, with applications across academia and industry.",
-        tags: ["Language Bias", "Fairness", "Multilingual NLP", "Methodology"],
+        description: "Comprehensive research on identifying the capabilities of LLMs across many different case studies. Additionally, we looked into the risks, mainly focusing on social bias in LLMs.",
+        tags: ["Language Bias", "Fairness", "Multilingual NLP"],
         links: {
             paper: "https://kuleuven.limo.libis.be/discovery/fulldisplay?docid=lirias4232354"
         },
@@ -59,7 +59,7 @@ const publicationsData = [
         venue: "Journal of Business Analytics",
         venueType: "Journal Article",
         description: "This viewpoint article offers a cross-disciplinary synthesis of insights from Computer Science, Business, Psychology, and Law to develop practical, actionable guidelines for responsible LLM deployment in business contexts.",
-        tags: ["Business Ethics", "LLM Deployment", "Responsible AI"],
+        tags: ["Business Ethics", "Anthropomorphization", "Responsible AI"],
         links: {
             paper: "https://www.tandfonline.com/doi/abs/10.1080/2573234X.2025.2551951"
         },
@@ -75,8 +75,8 @@ const publicationsData = [
         date: "2025-02-28",
         venue: "AI & Society",
         venueType: "Journal Article",
-        description: "This paper demonstrates how LLMs can democratize access to cultural heritage by automating keyword extraction and making museum archives more searchable and understandable to broader audiences.",
-        tags: ["Cultural Heritage", "Accessibility", "Public Good"],
+        description: "This paper demonstrates how LLMs can democratize access to cultural heritage by automating keyword extraction and making museum archives more searchable to broader audiences.",
+        tags: ["Cultural Heritage", "Accessibility", "Keyword Extraction"],
         links: {
             paper: "https://link.springer.com/article/10.1007/s00146-025-02227-8"
         },
@@ -109,7 +109,7 @@ const publicationsData = [
         date: "2024-02-01",
         venue: "TOP",
         venueType: "Journal Article",
-        description: "This paper introduces a three-step weak supervision approach for predicting demographics of Twitter users, enabling large-scale demographic analysis.",
+        description: "This paper introduces a three-step weak supervision approach for predicting demographics of Twitter users.",
         tags: ["Social Media", "Weak Supervision", "Demographics"],
         links: {
             paper: "https://link.springer.com/content/pdf/10.1007/s11750-024-00666-y.pdf"
@@ -126,7 +126,7 @@ const publicationsData = [
         date: "2023-03-05",
         venue: "Journal of Business Analytics",
         venueType: "Journal Article",
-        description: "This paper uses topic modeling to analyze innovation within Flemish companies based on their websites, providing insights into regional innovation patterns.",
+        description: "This paper uses topic modeling to analyze innovation within Flemish companies based on their websites.",
         tags: ["Topic Modeling", "Innovation", "Business Analytics"],
         links: {
             paper: "https://www.tandfonline.com/doi/pdf/10.1080/2573234X.2023.2186274"
@@ -145,8 +145,8 @@ const publicationsData = [
         date: "2025-10-24",
         venue: "IJCNLP-AACL 2025 (Findings)",
         venueType: "Conference Paper",
-        description: "We uncover a critical yet understudied bias in language models: native design bias, where models designed primarily for English systematically underperform on non-English languages. This research provides quantitative evidence of how architectural choices perpetuate linguistic inequality.",
-        tags: ["Design Bias", "Multilingual", "Language Equity"],
+        description: "This study focuses on English native design bias, where models designed primarily for English underperform when prompted by non-native English speakers on objective tasks.",
+        tags: ["Design Bias", "English Nativeness", "Language variety bias"],
         links: {
             paper: "https://aclanthology.org/2025.findings-ijcnlp.73/"
         },
@@ -162,7 +162,7 @@ const publicationsData = [
         date: "2025-08-15",
         venue: "EMNLP 2025 (Findings)",
         venueType: "Conference Paper",
-        description: "This study investigates whether persona-assigned LLMs maintain consistent personality traits across different scenarios. We reveal critical insights about LLM reliability and the validity of personality stereotypes in AI systems.",
+        description: "This study investigates whether persona-assigned LLMs maintain consistent personality traits across different scenarios. Additionally, we analyze whether there are spillover effects for non-assigned persona categories.",
         tags: ["Persona Consistency", "LLM Evaluation", "Bias Analysis"],
         links: {
             paper: "https://aclanthology.org/2025.findings-emnlp.603/"
@@ -197,7 +197,7 @@ const publicationsData = [
         venue: "EMNLP 2023",
         venueType: "Conference Paper",
         description: "This paper introduces a novel exemplar selection method named SEER for in-context learning in hybrid question answering systems.",
-        tags: ["In-Context Learning", "Question Answering", "Optimization"],
+        tags: ["In-Context Learning", "Hybrid Question Answering", "Knapsack"],
         links: {
             paper: "https://aclanthology.org/2023.emnlp-main.837/"
         },
@@ -214,7 +214,7 @@ const publicationsData = [
         venue: "EMNLP 2023",
         venueType: "Conference Paper",
         description: "This paper investigates the transferability of debiasing techniques across different languages within multilingual models, revealing insights about cross-lingual bias mitigation.",
-        tags: ["Debiasing", "Multilingual", "Transfer Learning"],
+        tags: ["Cross-Lingual debiasing", "Multilingual", "Social Bias"],
         links: {
             paper: "https://aclanthology.org/2023.emnlp-main.175/"
         },
