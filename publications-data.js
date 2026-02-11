@@ -26,27 +26,24 @@ const publicationsData = [
 
     // ==================== PREPRINTS ====================
     // Add your preprints here following this template:
-    /*
     {
-        id: "preprint-2026-example",
+        id: "preprint-2026-WTP",
         type: "preprint",
-        title: "Your Preprint Title",
-        authors: ["Author 1", "Manon Reusens", "Author 3"],
+        title: "Would a Large Language Model Pay Extra for a View? Inferring Willingness to Pay from Subjective Choices",
+        authors: [ "Manon Reusens", "Sofie Goethals", "Toon Calders", "David Martens"],
         year: 2026,
-        date: "2026-03-15",
+        date: "2026-02-10",
         venue: "arXiv",
         venueType: "Preprint",
-        description: "Description of your preprint research...",
-        tags: ["Tag1", "Tag2"],
-        categories: ["llm", "bias"],
+        description: "•	We introduce an economic evaluation framework that applies willingness-to-pay modeling to assess preference alignment in Large Language Models.",
+        tags: ["Large Language Models", "Willingness to Pay", "Preference Alignment"],
         links: {
-            arxiv: "https://arxiv.org/abs/XXXX.XXXXX",
-            pdf: "https://arxiv.org/pdf/XXXX.XXXXX.pdf"
+            arxiv: "https://arxiv.org/abs/2602.09802",
+            pdf: "https://arxiv.org/pdf/2602.09802"
         },
-        emoji: "📝",
-        featured: false
+        emoji: "🏨",
+        featured: true
     },
-    */
 
     // ==================== JOURNAL ARTICLES ====================
     {
@@ -151,7 +148,7 @@ const publicationsData = [
             paper: "https://aclanthology.org/2025.findings-ijcnlp.73/"
         },
         emoji: "🌐",
-        featured: true
+        featured: false
     },
     {
         id: "emnlp-2025-personas",
