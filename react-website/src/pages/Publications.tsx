@@ -26,8 +26,8 @@ const Publications: React.FC = () => {
   ];
 
   return (
-    <Space direction="vertical" size="large" style={{ width: '100%', maxWidth: 1200 }}>
-      <Space direction="vertical" size="middle" style={{ width: '100%', textAlign: 'center' }}>
+    <Space orientation="vertical" size="large" style={{ width: '100%', maxWidth: 1200 }}>
+      <Space orientation="vertical" size="middle" style={{ width: '100%', textAlign: 'center' }}>
         <Title level={2}>Publications</Title>
         <Paragraph type="secondary">
           Research at the intersection of Responsible AI, bias mitigation, and practical LLM applications
@@ -47,7 +47,7 @@ const Publications: React.FC = () => {
       </Space>
 
       <Card>
-        <Space wrap size="middle">
+        <Space wrap size="middle" style={{ width: "100%", justifyContent: "center" }}>
           {filters.map((f) => (
             <Button
               key={f.key}
@@ -63,15 +63,16 @@ const Publications: React.FC = () => {
       <Row gutter={[16, 16]}>
         {filteredPubs.map((pub) => (
           <Col key={pub.id} xs={24} md={12} lg={8}>
-            <Card hoverable>
-              <Space direction="vertical" size="small" style={{ width: '100%' }}>
-                <Tag color="green">{pub.venueType} — {pub.year}</Tag>
+            <Card className='publication-card' hoverable>
+              <Space orientation="vertical" size="small" style={{ width: '100%' }}>
+                <Tag className="tag tag-secondary">{pub.venueType} — {pub.year}</Tag>
                 <Title level={5} style={{ margin: 0 }}>{pub.title}</Title>
                 <Text type="secondary" style={{ fontSize: '0.9em' }}>{pub.authors.join(', ')}</Text>
                 <Paragraph>{pub.description}</Paragraph>
                 
                 {pub.tags.length > 0 && (
                   <>
+                  <Tag className="tag tag-primary">Venue: {pub.venue}</Tag>
                     <Text type="secondary" strong style={{ fontSize: '0.85em' }}>Tags</Text>
                     <Space wrap size="small">
                       {pub.tags.map((tag) => (
@@ -83,16 +84,16 @@ const Publications: React.FC = () => {
                 
                 <Space wrap>
                   {pub.links.paper && (
-                    <Button size="small" href={pub.links.paper} target="_blank">Paper</Button>
+                    <Button type="primary" size="small" href={pub.links.paper} target="_blank">Paper</Button>
                   )}
                   {pub.links.arxiv && (
-                    <Button size="small" href={pub.links.arxiv} target="_blank">arXiv</Button>
+                    <Button  type="primary" size="small" href={pub.links.arxiv} target="_blank">arXiv</Button>
                   )}
                   {pub.links.code && (
-                    <Button size="small" href={pub.links.code} target="_blank">Code</Button>
+                    <Button type="primary" size="small" href={pub.links.code} target="_blank">Code</Button>
                   )}
                   {pub.links.slides && (
-                    <Button size="small" href={pub.links.slides} target="_blank">Slides</Button>
+                    <Button  type="primary" size="small" href={pub.links.slides} target="_blank">Slides</Button>
                   )}
                 </Space>
               </Space>

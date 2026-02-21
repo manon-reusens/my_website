@@ -43,6 +43,7 @@
 }
 
 .publication-tags {
+  color: var(--color-text-primary);
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
