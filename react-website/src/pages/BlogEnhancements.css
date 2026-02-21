@@ -16,11 +16,8 @@
 .animated-gradient-text {
   background: linear-gradient(
     45deg,
-    #667eea,
-    #764ba2,
-    #f093fb,
-    #4facfe,
-    #667eea
+    var(--color-accent-primary),
+    var(--color-accent-secondary),
   );
   background-size: 300% 300%;
   animation: gradient-shift 8s ease infinite;
@@ -97,7 +94,7 @@
   top: 0;
   left: 0;
   height: 3px;
-  background: linear-gradient(90deg, #667eea, #764ba2);
+  background: linear-gradient(90deg, var(--color-accent-primary), var(--color-accent-secondary));
   z-index: 1000;
   transition: width 0.1s ease-out;
 }
@@ -145,7 +142,7 @@
   left: 0;
   right: 0;
   height: 30px;
-  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(90deg, var(--color-accent-primary) 0%, var(--color-accent-secondary) 100%);
   border-radius: 8px 8px 0 0;
 }
 

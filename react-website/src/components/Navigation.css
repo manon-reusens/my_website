@@ -44,8 +44,8 @@
 }
 
 .theme-toggle:hover {
-  border-color: var(--color-accent-primary) !important;
-  color: var(--color-accent-primary) !important;
+  border-color: linear-gradient(90deg, var(--color-accent-primary) 0%, var(--color-accent-secondary) 100%) !important;
+  color: linear-gradient(90deg, var(--color-accent-primary) 0%, var(--color-accent-secondary) 100%) !important;
 }
 
 .desktop-nav {
@@ -72,8 +72,8 @@
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--color-accent-primary);
-  border-bottom: 2px solid var(--color-accent-primary);
+  color: linear-gradient(90deg, var(--color-accent-primary) 0%, var(--color-accent-secondary) 100%);
+  border-bottom: 2px solid linear-gradient(90deg, var(--color-accent-primary) 0%, var(--color-accent-secondary) 100%);
 }
 
 .mobile-nav-links {

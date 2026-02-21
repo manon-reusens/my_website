@@ -4,6 +4,8 @@ import { websiteConfig } from '../data/config';
 import { TalksAPI } from '../data/talks';
 import { formatDate } from '../utils/helpers';
 import './Talks.css';
+import './Blog.css';
+import './BlogEnhancements.css';
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -21,7 +23,7 @@ const Talks: React.FC = () => {
 
        {/* Keynote Section */}
       {keynote.enabled && (
-        <Card className='keynote-hero'>
+        <Card className="blog-card featured-keynote-card">
           <Space orientation="vertical" size="middle" style={{ width: '100%' }}>
             <Title level={2}>{keynote.headline}</Title>
             <Paragraph>{keynote.description}</Paragraph>

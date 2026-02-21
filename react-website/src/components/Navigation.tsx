@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Layout as AntLayout, Button, Drawer, Menu, Space, Avatar } from 'antd';
 import { MenuOutlined, BulbOutlined, BulbFilled } from '@ant-design/icons';
 import { useTheme } from '../contexts/ThemeContext';
+import './Navigation.css';
 
 const { Header } = AntLayout;
 
@@ -19,8 +20,8 @@ const Navigation: React.FC<NavigationProps> = ({ logoSrc = '/MR-logo.png' }) => 
     { key: '/', label: 'Home' },
     { key: '/publications', label: 'Publications' },
     { key: '/talks', label: 'Talks' },
-    { key: '/teaching', label: 'Teaching' },
     { key: '/blog', label: 'Blog' },
+    { key: '/teaching', label: 'Teaching' },
     { key: '/cv', label: 'CV' },
   ];
 
@@ -35,7 +36,7 @@ const Navigation: React.FC<NavigationProps> = ({ logoSrc = '/MR-logo.png' }) => 
       zIndex: 100,
     }}>
       <Link to="/">
-        <Avatar src={logoSrc} size={40} shape="square" alt="MR logo" />
+        <Avatar src={logoSrc} size={50} shape="square" alt="MR logo" />
       </Link>
 
       <Menu

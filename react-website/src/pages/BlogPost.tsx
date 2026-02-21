@@ -28,7 +28,7 @@ const BlogPost: React.FC = () => {
   if (!blog) {
     return (
       <Card style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center', padding: '60px 20px' }}>
-        <Space direction="vertical" size="large">
+        <Space orientation="vertical" size="large">
           <Title level={3}>Blog Post Not Found</Title>
           <Paragraph type="secondary">
             The blog post you're looking for doesn't exist or has been removed.
@@ -61,7 +61,7 @@ const BlogPost: React.FC = () => {
         {/* Header */}
         <div className="blog-post-header">
           {blog.category && (
-            <Tag color="purple" style={{ marginBottom: 16 }}>
+            <Tag className='tag tag-secondary' style={{ marginBottom: 16 }}>
               {blog.category}
             </Tag>
           )}
@@ -117,7 +117,7 @@ const BlogPost: React.FC = () => {
         )}
 
         {/* Excerpt */}
-        <Paragraph className="blog-post-excerpt" style={{ fontSize: '1.1em', color: '#595959' }}>
+        <Paragraph className="blog-post-excerpt" style={{ fontSize: '1.1em', color: 'var(--color-text-secondary)' }}>
           {blog.excerpt}
         </Paragraph>
 
@@ -157,7 +157,7 @@ const BlogPost: React.FC = () => {
             </Space>
           }
         >
-          <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+          <Space orientation="vertical" size="middle" style={{ width: '100%' }}>
             {relatedPosts.map((post) => (
               <Card
                 key={post.id}
@@ -166,10 +166,10 @@ const BlogPost: React.FC = () => {
                 onClick={() => navigate(`/blog/${post.id}`)}
                 className="related-post-card"
               >
-                <Space direction="vertical" size="small" style={{ width: '100%' }}>
+                <Space orientation="vertical" size="small" style={{ width: '100%' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Title level={5} style={{ margin: 0 }}>{post.title}</Title>
-                    {post.category && <Tag color="blue">{post.category}</Tag>}
+                    {post.category && <Tag className='tag tag-secondary'>{post.category}</Tag>}
                   </div>
                   <Text type="secondary" style={{ fontSize: '0.9em' }}>
                     {post.excerpt}

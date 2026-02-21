@@ -91,6 +91,10 @@
 .keynote-hero .ant-typography {
   color: var(--color-text-primary);
 }
+.featured-keynote-card {
+  border: 2px solid var(--color-accent-secondary);
+  box-shadow: 0 4px 12px rgba(255, 214, 102, 0.2);
+}
 
 /* Smaller topic cards inside keynote */
 .keynote-card {

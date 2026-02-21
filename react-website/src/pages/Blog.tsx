@@ -46,10 +46,10 @@ const Blog: React.FC = () => {
   const regularBlogs = filteredBlogs.filter(blog => !blog.featured);
 
   return (
-    <Space direction="vertical" size="large" style={{ width: '100%', maxWidth: 1200 }}>
+    <Space orientation="vertical" size="large" style={{ width: '100%', maxWidth: 1200 }}>
       {/* Header Section */}
       <div className="blog-header">
-        <Space direction="vertical" size="middle" style={{ width: '100%', textAlign: 'center' }}>
+        <Space orientation="vertical" size="middle" style={{ width: '100%', textAlign: 'center' }}>
           <Title level={2}>
             <BookOutlined style={{ marginRight: 12 }} />
             Blog
@@ -62,7 +62,7 @@ const Blog: React.FC = () => {
 
       {/* Search and Filter Bar */}
       <Card className="filter-card">
-        <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+        <Space orientation="vertical" size="middle" style={{ width: '100%' }}>
           <Search
             placeholder="Search blog posts..."
             prefix={<SearchOutlined />}
@@ -90,7 +90,7 @@ const Blog: React.FC = () => {
 
       {/* Featured Posts */}
       {featuredBlogs.length > 0 && (
-        <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+        <Space orientation="vertical" size="middle" style={{ width: '100%' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <FireOutlined style={{ color: '#ff4d4f', fontSize: 20 }} />
             <Title level={4} style={{ margin: 0 }}>Featured Posts</Title>
@@ -114,7 +114,7 @@ const Blog: React.FC = () => {
                     ) : (
                       <div className="blog-card-placeholder" style={{ 
                         height: 200,
-                        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                        background: 'linear-gradient(135deg, var(--color-accent-primary), var(--color-accent-secondary))',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center'
@@ -124,11 +124,11 @@ const Blog: React.FC = () => {
                     )
                   }
                 >
-                  <Space direction="vertical" size="small" style={{ width: '100%' }}>
+                  <Space orientation="vertical" size="small" style={{ width: '100%' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <Tag color="gold" icon={<FireOutlined />}>Featured</Tag>
+                      <Tag className='tag tag-primary' icon={<FireOutlined />}>Featured</Tag>
                       {blog.category && (
-                        <Tag color="purple">{blog.category}</Tag>
+                        <Tag className='tag tag-secondary'>{blog.category}</Tag>
                       )}
                     </div>
                     
@@ -168,7 +168,7 @@ const Blog: React.FC = () => {
 
       {/* Regular Posts */}
       {regularBlogs.length > 0 && (
-        <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+        <Space orientation="vertical" size="middle" style={{ width: '100%' }}>
           {featuredBlogs.length > 0 && (
             <Title level={4}>More Posts</Title>
           )}
@@ -181,10 +181,10 @@ const Blog: React.FC = () => {
                   className="blog-card"
                   onClick={() => navigate(`/blog/${blog.id}`)}
                 >
-                  <Space direction="vertical" size="small" style={{ width: '100%' }}>
+                  <Space orientation="vertical" size="small" style={{ width: '100%' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       {blog.category && (
-                        <Tag color="blue" icon={categoryIcons[blog.category]}>
+                        <Tag className='tag tag-secondary' icon={categoryIcons[blog.category]}>
                           {blog.category}
                         </Tag>
                       )}
@@ -225,7 +225,7 @@ const Blog: React.FC = () => {
       {/* No Results */}
       {filteredBlogs.length === 0 && (
         <Card style={{ textAlign: 'center', padding: '60px 20px' }}>
-          <Space direction="vertical" size="middle">
+          <Space orientation="vertical" size="middle">
             <SearchOutlined style={{ fontSize: 48, color: '#d9d9d9' }} />
             <Title level={4}>No posts found</Title>
             <Text type="secondary">
