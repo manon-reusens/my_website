@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Row, Col, Typography, Space, Avatar, Divider } from 'antd';
-import { MailOutlined, LinkedinOutlined, GithubOutlined, GoogleOutlined, EnvironmentOutlined } from '@ant-design/icons';
+import { MailOutlined, LinkedinOutlined, GithubOutlined, BookOutlined, EnvironmentOutlined } from '@ant-design/icons';
 import { websiteConfig } from '../data/config';
 import { publicationsData, PublicationsAPI } from '../data/publications';
 import { TalksAPI } from '../data/talks';
@@ -20,7 +20,7 @@ const CV: React.FC = () => {
   const contactIcons = [
     { href: `mailto:${personal.contact.email}`, icon: <MailOutlined />, label: 'Email' },
     { href: personal.contact.linkedin, icon: <LinkedinOutlined />, label: 'LinkedIn' },
-    { href: personal.contact.scholar, icon: <GoogleOutlined />, label: 'Scholar' },
+    { href: personal.contact.scholar, icon: <BookOutlined />, label: 'Scholar' },
     { href: personal.contact.github, icon: <GithubOutlined />, label: 'GitHub' },
   ];
 
@@ -41,9 +41,9 @@ const CV: React.FC = () => {
 
               <Divider />
 
-              <div style={{ width: '100%', textAlign: 'left' }}>
+              <Space direction="vertical" size="middle" style={{ width: '100%', textAlign: 'left' }}>
                 <Text strong>Contact</Text>
-                <Space size="middle" style={{ marginTop: 8, marginBottom: 8 }}>
+                <Space size="middle" wrap>
                   {contactIcons.map((contact, idx) => (
                     <a
                       key={idx}
@@ -57,44 +57,44 @@ const CV: React.FC = () => {
                     </a>
                   ))}
                 </Space>
-                <Paragraph>
+                <Paragraph style={{ margin: 0 }}>
                   <Text>{personal.contact.email}</Text><br />
                   <Text type="secondary"><EnvironmentOutlined /> {personal.contact.location}</Text>
                 </Paragraph>
-              </div>
+              </Space>
 
               <Divider />
 
-              <div style={{ width: '100%', textAlign: 'left' }}>
+              <Space direction="vertical" size="small" style={{ width: '100%', textAlign: 'left' }}>
                 <Text strong>Research Focus</Text>
-                <ul style={{ marginTop: 8, paddingLeft: 20 }}>
+                <ul style={{ paddingLeft: 20, margin: 0 }}>
                   {personal.researchFocus.map((item, idx) => (
                     <li key={idx}><Text>{item}</Text></li>
                   ))}
                 </ul>
-              </div>
+              </Space>
 
               <Divider />
 
-              <div style={{ width: '100%', textAlign: 'left' }}>
+              <Space direction="vertical" size="small" style={{ width: '100%', textAlign: 'left' }}>
                 <Text strong>Technical Skills</Text>
-                <ul style={{ marginTop: 8, paddingLeft: 20 }}>
+                <ul style={{ paddingLeft: 20, margin: 0 }}>
                   {personal.technicalSkills.map((skill, idx) => (
                     <li key={idx}><Text>{skill}</Text></li>
                   ))}
                 </ul>
-              </div>
+              </Space>
 
               <Divider />
 
-              <div style={{ width: '100%', textAlign: 'left' }}>
+              <Space direction="vertical" size="small" style={{ width: '100%', textAlign: 'left' }}>
                 <Text strong>Languages</Text>
-                <ul style={{ marginTop: 8, paddingLeft: 20 }}>
+                <ul style={{ paddingLeft: 20, margin: 0 }}>
                   {personal.languages.map((lang, idx) => (
                     <li key={idx}><Text>{lang.language} — {lang.level}</Text></li>
                   ))}
                 </ul>
-              </div>
+              </Space>
             </Space>
           </Card>
         </Col>
@@ -104,49 +104,53 @@ const CV: React.FC = () => {
           <Space direction="vertical" size="middle" style={{ width: '100%' }}>
             {/* Education */}
             <Card>
-              <Title level={4}>Education</Title>
-              {thesis && (
-                <div>
-                  <Text strong>PhD in Business Economics — {thesis.venue}</Text><br />
-                  <Text type="secondary">{new Date(thesis.date).getFullYear()}</Text><br />
-                  <Text>{thesis.title}</Text><br />
-                  {thesis.promotors && (
-                    <Text type="secondary" italic>(Co-)Supervisors: {thesis.promotors}</Text>
-                  )}
-                </div>
-              )}
+              <Space direction="vertical" size="small" style={{ width: '100%' }}>
+                <Title level={4} style={{ margin: 0 }}>Education</Title>
+                {thesis && (
+                  <Space direction="vertical" size={0}>
+                    <Text strong>PhD in Business Economics — {thesis.venue}</Text>
+                    <Text type="secondary">{new Date(thesis.date).getFullYear()}</Text>
+                    <Text>{thesis.title}</Text>
+                    {thesis.promotors && (
+                      <Text type="secondary" italic>(Co-)Supervisors: {thesis.promotors}</Text>
+                    )}
+                  </Space>
+                )}
+              </Space>
             </Card>
 
             {/* Positions */}
             <Card>
-              <Title level={4}>Positions</Title>
-              <Space direction="vertical" size="small">
-                {personal.positions.map((pos, idx) => (
-                  <Text key={idx} strong>{pos.title}</Text>
-                ))}
+              <Space direction="vertical" size="small" style={{ width: '100%' }}>
+                <Title level={4} style={{ margin: 0 }}>Positions</Title>
+                <Space direction="vertical" size="small">
+                  {personal.positions.map((pos, idx) => (
+                    <Text key={idx} strong>{pos.title}</Text>
+                  ))}
+                </Space>
               </Space>
             </Card>
 
             {/* Selected Publications */}
             <Card>
-              <Title level={4}>Selected Publications</Title>
               <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+                <Title level={4} style={{ margin: 0 }}>Selected Publications</Title>
                 {featuredPubs.map((pub) => (
-                  <div key={pub.id}>
-                    <Text strong>{pub.title}</Text><br />
+                  <Space key={pub.id} direction="vertical" size={0}>
+                    <Text strong>{pub.title}</Text>
                     <Text type="secondary">{pub.authors.join(', ')} — {pub.venue} ({pub.year})</Text>
-                  </div>
+                  </Space>
                 ))}
               </Space>
             </Card>
 
             {/* Talks */}
             <Card>
-              <Title level={4}>Talks (Recent)</Title>
               <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+                <Title level={4} style={{ margin: 0 }}>Talks (Recent)</Title>
                 {recentTalks.map((talk) => (
-                  <div key={talk.id}>
-                    <Text strong>{talk.title}</Text><br />
+                  <Space key={talk.id} direction="vertical" size={0}>
+                    <Text strong>{talk.title}</Text>
                     <Text type="secondary">
                       {talk.type} — {talk.event} —{' '}
                       {new Date(talk.date).toLocaleDateString(undefined, {
@@ -154,28 +158,28 @@ const CV: React.FC = () => {
                         month: 'short',
                       })}
                     </Text>
-                  </div>
+                  </Space>
                 ))}
               </Space>
             </Card>
 
             {/* Teaching */}
             <Card>
-              <Title level={4}>Teaching</Title>
               <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+                <Title level={4} style={{ margin: 0 }}>Teaching</Title>
                 {currentTeaching.map((teaching) => (
-                  <div key={teaching.id}>
-                    <Text strong>{teaching.role} — {teaching.course}</Text><br />
+                  <Space key={teaching.id} direction="vertical" size={0}>
+                    <Text strong>{teaching.role} — {teaching.course}</Text>
                     <Text type="secondary">
                       {teaching.institution} — {teaching.startYear}–{teaching.endYear || 'present'}
                     </Text>
-                  </div>
+                  </Space>
                 ))}
                 {guestLectures.slice(0, 3).map((lecture) => (
-                  <div key={lecture.id}>
-                    <Text strong>Guest Lecture — {lecture.course}</Text><br />
+                  <Space key={lecture.id} direction="vertical" size={0}>
+                    <Text strong>Guest Lecture — {lecture.course}</Text>
                     <Text type="secondary">{lecture.institution} — {lecture.year}</Text>
-                  </div>
+                  </Space>
                 ))}
               </Space>
             </Card>
