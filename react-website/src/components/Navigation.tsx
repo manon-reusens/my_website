@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Layout as AntLayout, Button, Drawer } from 'antd';
-import {  MenuOutlined, CloseOutlined, BulbOutlined, BulbFilled } from '@ant-design/icons';
+import { Layout as AntLayout, Button, Drawer, Menu, Space, Avatar } from 'antd';
+import { MenuOutlined, BulbOutlined, BulbFilled } from '@ant-design/icons';
 import { useTheme } from '../hooks/useTheme';
-import './Navigation.css';
 
 const { Header } = AntLayout;
 
@@ -17,74 +16,84 @@ const Navigation: React.FC<NavigationProps> = ({ logoSrc = '/MR-logo.png' }) => 
   const location = useLocation();
 
   const menuItems = [
-    { path: '/', label: 'Home' },
-    { path: '/publications', label: 'Publications' },
-    { path: '/talks', label: 'Talks' },
-    { path: '/teaching', label: 'Teaching' },
-    { path: '/cv', label: 'CV' },
+    { key: '/', label: 'Home' },
+    { key: '/publications', label: 'Publications' },
+    { key: '/talks', label: 'Talks' },
+    { key: '/teaching', label: 'Teaching' },
+    { key: '/cv', label: 'CV' },
   ];
 
-  const isActive = (path: string) => location.pathname === path;
-
   return (
-    <Header className="site-header">
-      <div className="nav-content">
-        <Link className="logo" to="/">
-          <img src={logoSrc} alt="MR logo" className="logo-image" />
-        </Link>
+    <Header style={{ 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'space-between',
+      padding: '0 24px',
+      position: 'sticky',
+      top: 0,
+      zIndex: 100,
+    }}>
+      <Link to="/">
+        <Avatar src={logoSrc} size={40} shape="square" alt="MR logo" />
+      </Link>
 
-        <Button
-          className="nav-toggle"
-          icon={mobileMenuOpen ? <CloseOutlined /> : <MenuOutlined />}
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle menu"
-        />
+      <Menu
+        mode="horizontal"
+        selectedKeys={[location.pathname]}
+        style={{ 
+          flex: 1, 
+          minWidth: 0,
+          marginLeft: 24,
+          borderBottom: 'none',
+          display: 'none',
+        }}
+        className="desktop-menu"
+        items={menuItems.map(item => ({
+          key: item.key,
+          label: <Link to={item.key}>{item.label}</Link>,
+        }))}
+      />
+      
+      <style>{`
+        @media (min-width: 768px) {
+          .desktop-menu {
+            display: flex !important;
+          }
+          .mobile-toggle {
+            display: none !important;
+          }
+        }
+      `}</style>
 
+      <Space>
         <Button
-          className="theme-toggle"
+          type="text"
           icon={theme === 'dark' ? <BulbFilled /> : <BulbOutlined />}
           onClick={toggleTheme}
-          aria-label="Toggle theme"
         />
+        <Button
+          className="mobile-toggle"
+          type="text"
+          icon={<MenuOutlined />}
+          onClick={() => setMobileMenuOpen(true)}
+        />
+      </Space>
 
-        <nav className="desktop-nav">
-          <ul className="nav-links">
-            {menuItems.map((item) => (
-              <li key={item.path}>
-                <Link
-                  to={item.path}
-                  className={isActive(item.path) ? 'active' : ''}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <Drawer
-          placement="right"
-          open={mobileMenuOpen}
-          onClose={() => setMobileMenuOpen(false)}
-          className="mobile-drawer"
-        >
-          <nav>
-            <ul className="mobile-nav-links">
-              {menuItems.map((item) => (
-                <li key={item.path}>
-                  <Link
-                    to={item.path}
-                    className={isActive(item.path) ? 'active' : ''}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </Drawer>
-      </div>
+      <Drawer
+        placement="right"
+        open={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+        width={250}
+      >
+        <Menu
+          mode="inline"
+          selectedKeys={[location.pathname]}
+          items={menuItems.map(item => ({
+            key: item.key,
+            label: <Link to={item.key} onClick={() => setMobileMenuOpen(false)}>{item.label}</Link>,
+          }))}
+        />
+      </Drawer>
     </Header>
   );
 };

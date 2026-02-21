@@ -1,11 +1,12 @@
 import React from 'react';
-import { Card } from 'antd';
-import { MailOutlined, LinkedinOutlined, GithubOutlined, EnvironmentOutlined } from '@ant-design/icons';
+import { Card, Row, Col, Typography, Space, Avatar, Divider } from 'antd';
+import { MailOutlined, LinkedinOutlined, GithubOutlined, GoogleOutlined, EnvironmentOutlined } from '@ant-design/icons';
 import { websiteConfig } from '../data/config';
 import { publicationsData, PublicationsAPI } from '../data/publications';
 import { TalksAPI } from '../data/talks';
 import { TeachingAPI } from '../data/teaching';
-import './CV.css';
+
+const { Title, Text, Paragraph } = Typography;
 
 const CV: React.FC = () => {
   const { personal } = websiteConfig;
@@ -19,189 +20,169 @@ const CV: React.FC = () => {
   const contactIcons = [
     { href: `mailto:${personal.contact.email}`, icon: <MailOutlined />, label: 'Email' },
     { href: personal.contact.linkedin, icon: <LinkedinOutlined />, label: 'LinkedIn' },
-    { href: personal.contact.scholar, icon: <GithubOutlined />, label: 'Scholar' },
+    { href: personal.contact.scholar, icon: <GoogleOutlined />, label: 'Scholar' },
     { href: personal.contact.github, icon: <GithubOutlined />, label: 'GitHub' },
   ];
 
   return (
-    <div className="cv-page container">
-      <section className="section-header">
-        <h2>Curriculum Vitae</h2>
-      </section>
+    <Space direction="vertical" size="large" style={{ width: '100%', maxWidth: 1200 }}>
+      <Title level={2}>Curriculum Vitae</Title>
 
-      <div className="cv-grid fade-in-up">
+      <Row gutter={[24, 24]}>
         {/* Sidebar */}
-        <aside>
-          <Card className="cv-sidebar">
-            <div className="cv-profile">
-              <img
-                className="profile-image"
-                src={`/${personal.profileImage}`}
-                alt={`Portrait of ${personal.name}`}
-              />
-              <h3>{personal.name}</h3>
-              <p className="muted">{personal.title}</p>
-            </div>
+        <Col xs={24} md={8}>
+          <Card>
+            <Space direction="vertical" size="middle" style={{ width: '100%', textAlign: 'center' }}>
+              <Avatar size={120} src={`/${personal.profileImage}`} alt={personal.name} />
+              <div>
+                <Title level={4} style={{ margin: 0 }}>{personal.name}</Title>
+                <Text type="secondary">{personal.title}</Text>
+              </div>
 
-            <hr className="cv-divider" />
+              <Divider />
 
-            <div className="cv-section-small">
-              <h4>Contact</h4>
-              <ul className="cv-contact-icons">
-                {contactIcons.map((contact, idx) => (
-                  <li key={idx}>
+              <div style={{ width: '100%', textAlign: 'left' }}>
+                <Text strong>Contact</Text>
+                <Space size="middle" style={{ marginTop: 8, marginBottom: 8 }}>
+                  {contactIcons.map((contact, idx) => (
                     <a
+                      key={idx}
                       href={contact.href}
-                      className="cv-icon-link"
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={contact.label}
+                      style={{ fontSize: '1.5em' }}
                     >
                       {contact.icon}
                     </a>
-                  </li>
-                ))}
-              </ul>
-              <ul className="cv-contact-list">
-                <li>{personal.contact.email}</li>
-                <li>
-                  <EnvironmentOutlined /> {personal.contact.location}
-                </li>
-              </ul>
-            </div>
+                  ))}
+                </Space>
+                <Paragraph>
+                  <Text>{personal.contact.email}</Text><br />
+                  <Text type="secondary"><EnvironmentOutlined /> {personal.contact.location}</Text>
+                </Paragraph>
+              </div>
 
-            <hr className="cv-divider" />
+              <Divider />
 
-            <div className="cv-section-small">
-              <h4>Research Focus</h4>
-              <ul className="cv-list">
-                {personal.researchFocus.map((item, idx) => (
-                  <li key={idx}>{item}</li>
-                ))}
-              </ul>
-            </div>
+              <div style={{ width: '100%', textAlign: 'left' }}>
+                <Text strong>Research Focus</Text>
+                <ul style={{ marginTop: 8, paddingLeft: 20 }}>
+                  {personal.researchFocus.map((item, idx) => (
+                    <li key={idx}><Text>{item}</Text></li>
+                  ))}
+                </ul>
+              </div>
 
-            <hr className="cv-divider" />
+              <Divider />
 
-            <div className="cv-section-small">
-              <h4>Technical Skills</h4>
-              <ul className="cv-list">
-                {personal.technicalSkills.map((skill, idx) => (
-                  <li key={idx}>{skill}</li>
-                ))}
-              </ul>
-            </div>
+              <div style={{ width: '100%', textAlign: 'left' }}>
+                <Text strong>Technical Skills</Text>
+                <ul style={{ marginTop: 8, paddingLeft: 20 }}>
+                  {personal.technicalSkills.map((skill, idx) => (
+                    <li key={idx}><Text>{skill}</Text></li>
+                  ))}
+                </ul>
+              </div>
 
-            <hr className="cv-divider" />
+              <Divider />
 
-            <div className="cv-section-small">
-              <h4>Languages</h4>
-              <ul className="cv-list">
-                {personal.languages.map((lang, idx) => (
-                  <li key={idx}>
-                    {lang.language} — {lang.level}
-                  </li>
-                ))}
-              </ul>
-            </div>
+              <div style={{ width: '100%', textAlign: 'left' }}>
+                <Text strong>Languages</Text>
+                <ul style={{ marginTop: 8, paddingLeft: 20 }}>
+                  {personal.languages.map((lang, idx) => (
+                    <li key={idx}><Text>{lang.language} — {lang.level}</Text></li>
+                  ))}
+                </ul>
+              </div>
+            </Space>
           </Card>
-        </aside>
+        </Col>
 
         {/* Main Content */}
-        <section>
-          {/* Education */}
-          <Card className="cv-section">
-            <h3>Education</h3>
-            {thesis && (
-              <div className="cv-item">
+        <Col xs={24} md={16}>
+          <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+            {/* Education */}
+            <Card>
+              <Title level={4}>Education</Title>
+              {thesis && (
                 <div>
-                  <strong>PhD in Business Economics — {thesis.venue}</strong>
+                  <Text strong>PhD in Business Economics — {thesis.venue}</Text><br />
+                  <Text type="secondary">{new Date(thesis.date).getFullYear()}</Text><br />
+                  <Text>{thesis.title}</Text><br />
+                  {thesis.promotors && (
+                    <Text type="secondary" italic>(Co-)Supervisors: {thesis.promotors}</Text>
+                  )}
                 </div>
-                <div className="muted">{new Date(thesis.date).getFullYear()}</div>
-                <div>{thesis.title}</div>
-                {thesis.promotors && (
-                  <div className="muted" style={{ fontStyle: 'italic' }}>
-                    (Co-)Supervisors: {thesis.promotors}
+              )}
+            </Card>
+
+            {/* Positions */}
+            <Card>
+              <Title level={4}>Positions</Title>
+              <Space direction="vertical" size="small">
+                {personal.positions.map((pos, idx) => (
+                  <Text key={idx} strong>{pos.title}</Text>
+                ))}
+              </Space>
+            </Card>
+
+            {/* Selected Publications */}
+            <Card>
+              <Title level={4}>Selected Publications</Title>
+              <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+                {featuredPubs.map((pub) => (
+                  <div key={pub.id}>
+                    <Text strong>{pub.title}</Text><br />
+                    <Text type="secondary">{pub.authors.join(', ')} — {pub.venue} ({pub.year})</Text>
                   </div>
-                )}
-              </div>
-            )}
-          </Card>
+                ))}
+              </Space>
+            </Card>
 
-          {/* Positions */}
-          <Card className="cv-section">
-            <h3>Positions</h3>
-            {personal.positions.map((pos, idx) => (
-              <div key={idx} className="cv-item">
-                <strong>{pos.title}</strong>
-              </div>
-            ))}
-          </Card>
+            {/* Talks */}
+            <Card>
+              <Title level={4}>Talks (Recent)</Title>
+              <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+                {recentTalks.map((talk) => (
+                  <div key={talk.id}>
+                    <Text strong>{talk.title}</Text><br />
+                    <Text type="secondary">
+                      {talk.type} — {talk.event} —{' '}
+                      {new Date(talk.date).toLocaleDateString(undefined, {
+                        year: 'numeric',
+                        month: 'short',
+                      })}
+                    </Text>
+                  </div>
+                ))}
+              </Space>
+            </Card>
 
-          {/* Selected Publications */}
-          <Card className="cv-section">
-            <h3>Selected Publications</h3>
-            {featuredPubs.map((pub) => (
-              <div key={pub.id} className="cv-item">
-                <div>
-                  <strong>{pub.title}</strong>
-                </div>
-                <div className="muted">
-                  {pub.authors.join(', ')} — {pub.venue} ({pub.year})
-                </div>
-              </div>
-            ))}
-          </Card>
-
-          {/* Talks */}
-          <Card className="cv-section">
-            <h3>Talks (Recent)</h3>
-            {recentTalks.map((talk) => (
-              <div key={talk.id} className="cv-item">
-                <div>
-                  <strong>{talk.title}</strong>
-                </div>
-                <div className="muted">
-                  {talk.type} — {talk.event} —{' '}
-                  {new Date(talk.date).toLocaleDateString(undefined, {
-                    year: 'numeric',
-                    month: 'short',
-                  })}
-                </div>
-              </div>
-            ))}
-          </Card>
-
-          {/* Teaching */}
-          <Card className="cv-section">
-            <h3>Teaching</h3>
-            {currentTeaching.map((teaching) => (
-              <div key={teaching.id} className="cv-item">
-                <div>
-                  <strong>
-                    {teaching.role} — {teaching.course}
-                  </strong>
-                </div>
-                <div className="muted">
-                  {teaching.institution} — {teaching.startYear}–
-                  {teaching.endYear || 'present'}
-                </div>
-              </div>
-            ))}
-            {guestLectures.slice(0, 3).map((lecture) => (
-              <div key={lecture.id} className="cv-item">
-                <div>
-                  <strong>Guest Lecture — {lecture.course}</strong>
-                </div>
-                <div className="muted">
-                  {lecture.institution} — {lecture.year}
-                </div>
-              </div>
-            ))}
-          </Card>
-        </section>
-      </div>
-    </div>
+            {/* Teaching */}
+            <Card>
+              <Title level={4}>Teaching</Title>
+              <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+                {currentTeaching.map((teaching) => (
+                  <div key={teaching.id}>
+                    <Text strong>{teaching.role} — {teaching.course}</Text><br />
+                    <Text type="secondary">
+                      {teaching.institution} — {teaching.startYear}–{teaching.endYear || 'present'}
+                    </Text>
+                  </div>
+                ))}
+                {guestLectures.slice(0, 3).map((lecture) => (
+                  <div key={lecture.id}>
+                    <Text strong>Guest Lecture — {lecture.course}</Text><br />
+                    <Text type="secondary">{lecture.institution} — {lecture.year}</Text>
+                  </div>
+                ))}
+              </Space>
+            </Card>
+          </Space>
+        </Col>
+      </Row>
+    </Space>
   );
 };
 

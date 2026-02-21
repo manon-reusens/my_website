@@ -1,80 +1,74 @@
 import React from 'react';
-import { Card, Tag, Row, Col } from 'antd';
+import { Card, Tag, Row, Col, Typography, Space, Divider } from 'antd';
 import { TalksAPI } from '../data/talks';
 import { formatDate } from '../utils/helpers';
-import './Talks.css';
+
+const { Title, Paragraph, Text } = Typography;
 
 const Talks: React.FC = () => {
   const groupedByYear = TalksAPI.groupByYear({ excludeIds: ['custom-topics'] });
   const years = Object.keys(groupedByYear).sort((a, b) => Number(b) - Number(a));
 
   return (
-    <div className="talks-page container">
-      <section className="section-header">
-        <h2>Talks & Presentations</h2>
-        <p>Keynotes, invited talks, and conference presentations</p>
-      </section>
+    <Space direction="vertical" size="large" style={{ width: '100%', maxWidth: 1200 }}>
+      <Space direction="vertical" size="small">
+        <Title level={2}>Talks & Presentations</Title>
+        <Paragraph type="secondary">Keynotes, invited talks, and conference presentations</Paragraph>
+      </Space>
 
       {years.map((year) => (
-        <div key={year} className="year-section">
-          <h3 className="year-header">{year}</h3>
+        <Space key={year} direction="vertical" size="middle" style={{ width: '100%' }}>
+          <Divider>
+            <Title level={3} style={{ margin: 0 }}>{year}</Title>
+          </Divider>
           <Row gutter={[16, 16]}>
             {groupedByYear[year].map((talk) => (
               <Col key={talk.id} xs={24} lg={12}>
-                <Card className="talk-card" hoverable>
-                  <div className="talk-header">
-                    <Tag color={talk.type === 'Keynote' ? 'orange' : 'green'}>
-                      {talk.type}
-                    </Tag>
-                    <span className="talk-date">{formatDate(talk.date, true)}</span>
-                  </div>
-                  <h3>{talk.title}</h3>
-                  <p className="talk-event">
-                    <strong>{talk.event}</strong> • {talk.location}
-                  </p>
-                  {talk.duration && (
-                    <p className="talk-duration">Duration: {talk.duration}</p>
-                  )}
-                  <p>{talk.description}</p>
-                  
-                  {talk.moreInfo && (
-                    <p className="talk-more-info">{talk.moreInfo}</p>
-                  )}
-                  
-                  {talk.keywords && talk.keywords.length > 0 && (
-                    <div className="talk-keywords">
-                      {talk.keywords.map((keyword) => (
-                        <Tag key={keyword}>{keyword}</Tag>
-                      ))}
-                    </div>
-                  )}
-                  
-                  {(talk.links.event || talk.links.slides || talk.links.abstract) && (
-                    <div className="talk-links">
+                <Card hoverable>
+                  <Space direction="vertical" size="small" style={{ width: '100%' }}>
+                    <Space>
+                      <Tag color={talk.type === 'Keynote' ? 'orange' : 'green'}>{talk.type}</Tag>
+                      <Text type="secondary">{formatDate(talk.date, true)}</Text>
+                    </Space>
+                    <Title level={5} style={{ margin: 0 }}>{talk.title}</Title>
+                    <Text strong>{talk.event}</Text>
+                    <Text type="secondary">{talk.location}</Text>
+                    {talk.duration && (
+                      <Text type="secondary">Duration: {talk.duration}</Text>
+                    )}
+                    <Paragraph>{talk.description}</Paragraph>
+                    
+                    {talk.moreInfo && (
+                      <Paragraph type="secondary" style={{ fontStyle: 'italic' }}>{talk.moreInfo}</Paragraph>
+                    )}
+                    
+                    {talk.keywords && talk.keywords.length > 0 && (
+                      <Space wrap size="small">
+                        {talk.keywords.map((keyword) => (
+                          <Tag key={keyword} color="default">{keyword}</Tag>
+                        ))}
+                      </Space>
+                    )}
+                    
+                    <Space wrap>
                       {talk.links.event && (
-                        <a href={talk.links.event} target="_blank" rel="noopener noreferrer">
-                          Event →
-                        </a>
+                        <Typography.Link href={talk.links.event} target="_blank">Event →</Typography.Link>
                       )}
                       {talk.links.slides && (
-                        <a href={talk.links.slides} target="_blank" rel="noopener noreferrer">
-                          Slides →
-                        </a>
+                        <Typography.Link href={talk.links.slides} target="_blank">Slides →</Typography.Link>
                       )}
                       {talk.links.abstract && (
-                        <a href={talk.links.abstract} target="_blank" rel="noopener noreferrer">
-                          Abstract →
-                        </a>
+                        <Typography.Link href={talk.links.abstract} target="_blank">Abstract →</Typography.Link>
                       )}
-                    </div>
-                  )}
+                    </Space>
+                  </Space>
                 </Card>
               </Col>
             ))}
           </Row>
-        </div>
+        </Space>
       ))}
-    </div>
+    </Space>
   );
 };
 

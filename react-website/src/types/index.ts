@@ -16,6 +16,8 @@ export interface Publication {
     paper?: string;
     arxiv?: string;
     pdf?: string;
+    code?: string;
+    slides?: string;
   };
   emoji?: string;
   promotors?: string;

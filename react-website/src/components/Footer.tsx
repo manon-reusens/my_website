@@ -1,17 +1,15 @@
 import React from 'react';
-import { Layout as AntLayout } from 'antd';
-import './Footer.css';
+import { Layout as AntLayout, Typography } from 'antd';
 
 const { Footer: AntFooter } = AntLayout;
+const { Text } = Typography;
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <AntFooter className="site-footer">
-      <div className="container">
-        <p>&copy; {currentYear} Manon Reusens</p>
-      </div>
+    <AntFooter style={{ textAlign: 'center', padding: '24px 50px' }}>
+      <Text type="secondary">&copy; {currentYear} Manon Reusens</Text>
     </AntFooter>
   );
 };

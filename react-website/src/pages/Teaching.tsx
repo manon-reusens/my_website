@@ -1,146 +1,141 @@
 import React from 'react';
-import { Card, Tag, Row, Col } from 'antd';
+import { Card, Tag, Row, Col, Typography, Space, Divider } from 'antd';
 import { TeachingAPI } from '../data/teaching';
-import './Teaching.css';
+
+const { Title, Paragraph, Text } = Typography;
 
 const Teaching: React.FC = () => {
   const { current, guestLectures, assistantships } = TeachingAPI.getAll();
 
   return (
-    <div className="teaching-page container">
-      <section className="section-header">
-        <h2>Teaching</h2>
-        <p>Courses, guest lectures, and teaching assistantships</p>
-      </section>
+    <Space direction="vertical" size="large" style={{ width: '100%', maxWidth: 1200 }}>
+      <Space direction="vertical" size="small">
+        <Title level={2}>Teaching</Title>
+        <Paragraph type="secondary">Courses, guest lectures, and teaching assistantships</Paragraph>
+      </Space>
 
       {/* Current Teaching */}
       {current.length > 0 && (
-        <div className="teaching-section">
-          <h3 className="section-title">Current Teaching</h3>
+        <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+          <Divider>
+            <Title level={3} style={{ margin: 0 }}>Current Teaching</Title>
+          </Divider>
           <Row gutter={[16, 16]}>
             {current.map((teaching) => (
               <Col key={teaching.id} xs={24}>
-                <Card className="teaching-card">
-                  <div className="teaching-header">
-                    <div>
+                <Card>
+                  <Space direction="vertical" size="small" style={{ width: '100%' }}>
+                    <Space wrap>
                       <Tag color="green">{teaching.role}</Tag>
-                      <Tag>{teaching.level}</Tag>
-                    </div>
-                    <span className="teaching-year">
-                      {teaching.startYear}–{teaching.endYear || 'present'}
-                    </span>
-                  </div>
-                  <h3>{teaching.course}</h3>
-                  <p className="teaching-institution">{teaching.institution}</p>
-                  <p className="teaching-meta">
-                    {teaching.ects && `${teaching.ects} ECTS`}
-                    {teaching.students && ` • ${teaching.students} students`}
-                  </p>
-                  <p>{teaching.description}</p>
-                  
-                  {teaching.responsibilities && teaching.responsibilities.length > 0 && (
-                    <div className="teaching-responsibilities">
-                      <h4>Responsibilities:</h4>
-                      <ul>
-                        {teaching.responsibilities.map((resp, idx) => (
-                          <li key={idx}>{resp}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                  
-                  <div className="teaching-tags">
-                    {teaching.tags.map((tag) => (
-                      <Tag key={tag}>{tag}</Tag>
-                    ))}
-                  </div>
+                      <Tag color="default">{teaching.level}</Tag>
+                      <Text type="secondary">
+                        {teaching.startYear}–{teaching.endYear || 'present'}
+                      </Text>
+                    </Space>
+                    <Title level={4} style={{ margin: 0 }}>{teaching.course}</Title>
+                    <Text>{teaching.institution}</Text>
+                    <Text type="secondary">
+                      {teaching.ects && `${teaching.ects} ECTS`}
+                      {teaching.students && ` • ${teaching.students} students`}
+                    </Text>
+                    <Paragraph>{teaching.description}</Paragraph>
+                    
+                    {teaching.responsibilities && teaching.responsibilities.length > 0 && (
+                      <div>
+                        <Text strong>Responsibilities:</Text>
+                        <ul style={{ marginTop: 8 }}>
+                          {teaching.responsibilities.map((resp, idx) => (
+                            <li key={idx}>{resp}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    
+                    <Space wrap size="small">
+                      {teaching.tags.map((tag) => (
+                        <Tag key={tag} color="default">{tag}</Tag>
+                      ))}
+                    </Space>
+                  </Space>
                 </Card>
               </Col>
             ))}
           </Row>
-        </div>
+        </Space>
       )}
 
       {/* Guest Lectures */}
       {guestLectures.length > 0 && (
-        <div className="teaching-section">
-          <h3 className="section-title">Guest Lectures</h3>
+        <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+          <Divider>
+            <Title level={3} style={{ margin: 0 }}>Guest Lectures</Title>
+          </Divider>
           <Row gutter={[16, 16]}>
             {guestLectures.map((lecture) => (
               <Col key={lecture.id} xs={24} md={12}>
-                <Card className="teaching-card">
-                  <div className="teaching-header">
-                    <Tag color="orange">Guest Lecture</Tag>
-                    <span className="teaching-year">{lecture.year}</span>
-                  </div>
-                  <h3>{lecture.course}</h3>
-                  {lecture.parentCourse && (
-                    <p className="parent-course">Part of: {lecture.parentCourse}</p>
-                  )}
-                  <p className="teaching-institution">{lecture.institution}</p>
-                  <p className="teaching-meta">
-                    {lecture.ects && `${lecture.ects} ECTS`} • {lecture.level}
-                  </p>
-                  <p>{lecture.description}</p>
-                  
-                  <div className="teaching-tags">
-                    {lecture.tags.map((tag) => (
-                      <Tag key={tag}>{tag}</Tag>
-                    ))}
-                  </div>
+                <Card>
+                  <Space direction="vertical" size="small" style={{ width: '100%' }}>
+                    <Space>
+                      <Tag color="orange">Guest Lecture</Tag>
+                      <Text type="secondary">{lecture.year}</Text>
+                    </Space>
+                    <Title level={5} style={{ margin: 0 }}>{lecture.course}</Title>
+                    {lecture.parentCourse && (
+                      <Text type="secondary">Part of: {lecture.parentCourse}</Text>
+                    )}
+                    <Text>{lecture.institution}</Text>
+                    <Text type="secondary">
+                      {lecture.ects && `${lecture.ects} ECTS`} • {lecture.level}
+                    </Text>
+                    <Paragraph>{lecture.description}</Paragraph>
+                    
+                    <Space wrap size="small">
+                      {lecture.tags.map((tag) => (
+                        <Tag key={tag} color="default">{tag}</Tag>
+                      ))}
+                    </Space>
+                  </Space>
                 </Card>
               </Col>
             ))}
           </Row>
-        </div>
+        </Space>
       )}
 
       {/* Teaching Assistantships */}
       {assistantships.length > 0 && (
-        <div className="teaching-section">
-          <h3 className="section-title">Teaching Assistantships</h3>
+        <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+          <Divider>
+            <Title level={3} style={{ margin: 0 }}>Teaching Assistantships</Title>
+          </Divider>
           <Row gutter={[16, 16]}>
-            {assistantships.map((ta) => (
-              <Col key={ta.id} xs={24}>
-                <Card className="teaching-card">
-                  <div className="teaching-header">
-                    <Tag>Teaching Assistant</Tag>
-                    <span className="teaching-year">
-                      {ta.startYear}–{ta.endYear}
-                    </span>
-                  </div>
-                  <h3>{ta.course}</h3>
-                  <p className="teaching-institution">{ta.institution}</p>
-                  <p className="teaching-meta">
-                    {ta.ects && `${ta.ects} ECTS`}
-                    {ta.students && ` • ${ta.students}`}
-                    {ta.evaluation && ` • ${ta.evaluation}`}
-                  </p>
-                  <p>{ta.description}</p>
-                  
-                  {ta.responsibilities && ta.responsibilities.length > 0 && (
-                    <div className="teaching-responsibilities">
-                      <h4>Responsibilities:</h4>
-                      <ul>
-                        {ta.responsibilities.map((resp, idx) => (
-                          <li key={idx}>{resp}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                  
-                  <div className="teaching-tags">
-                    {ta.tags.map((tag) => (
-                      <Tag key={tag}>{tag}</Tag>
-                    ))}
-                  </div>
+            {assistantships.map((assistant) => (
+              <Col key={assistant.id} xs={24} md={12}>
+                <Card>
+                  <Space direction="vertical" size="small" style={{ width: '100%' }}>
+                    <Space>
+                      <Tag>Teaching Assistant</Tag>
+                      <Text type="secondary">
+                        {assistant.startYear}–{assistant.endYear}
+                      </Text>
+                    </Space>
+                    <Title level={5} style={{ margin: 0 }}>{assistant.course}</Title>
+                    <Text>{assistant.institution}</Text>
+                    <Paragraph>{assistant.description}</Paragraph>
+                    
+                    <Space wrap size="small">
+                      {assistant.tags.map((tag) => (
+                        <Tag key={tag} color="default">{tag}</Tag>
+                      ))}
+                    </Space>
+                  </Space>
                 </Card>
               </Col>
             ))}
           </Row>
-        </div>
+        </Space>
       )}
-    </div>
+    </Space>
   );
 };
 
