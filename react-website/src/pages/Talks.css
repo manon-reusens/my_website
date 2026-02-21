@@ -78,3 +78,40 @@
 .talk-links a:hover {
   color: var(--color-accent-secondary);
 }
+
+/* Keynote hero styling to attract bookings */
+.keynote-hero {
+  background: linear-gradient(135deg, var(--color-highlight-primary), rgba(0,0,0,0));
+  border: 1px solid rgba(16,185,129,0.08);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.35);
+}
+
+.keynote-hero .ant-typography {
+  color: var(--color-text-primary);
+}
+
+/* Smaller topic cards inside keynote */
+.keynote-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.keynote-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(2,6,23,0.25);
+}
+
+/* CTA wrapper to center the button and give it breathing room */
+.keynote-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+/* Add more vertical separation before the timeline/years */
+.year-section {
+  margin: 4rem 0;
+}
