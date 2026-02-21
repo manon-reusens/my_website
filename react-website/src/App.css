@@ -1,0 +1,68 @@
+/* Minimal global styles - most styling handled by Ant Design */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* CSS Variables for Light Mode */
+:root,
+[data-theme='light'] {
+  --color-accent-primary: #059669;
+  --color-accent-secondary: #ea580c;
+  --color-highlight-primary: rgba(5, 150, 105, 0.1);
+  --color-highlight-secondary: rgba(234, 88, 12, 0.1);
+  --color-text-primary: #111827;
+  --color-text-secondary: #6b7280;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #f3f4f6;
+  --color-border: #e5e7eb;
+  --color-background: #f9fafb;
+  --transition-speed: 0.3s;
+  
+  /* Icon variables */
+  --icon-fg: #374151;
+  --icon-bg: #f3f4f6;
+  --icon-border: #e5e7eb;
+  --icon-bg-hover: #e5e7eb;
+  --icon-border-hover: #059669;
+}
+
+/* CSS Variables for Dark Mode */
+[data-theme='dark'] {
+  --color-accent-primary: #10b981;
+  --color-accent-secondary: #d97706;
+  --color-highlight-primary: rgba(16, 185, 129, 0.15);
+  --color-highlight-secondary: rgba(217, 119, 6, 0.15);
+  --color-text-primary: #e6edf3;
+  --color-text-secondary: #9ca3af;
+  --color-surface: #232936;
+  --color-surface-elevated: #2d3548;
+  --color-border: #374151;
+  --color-background: #1a1f2e;
+  
+  /* Icon variables */
+  --icon-fg: #e6edf3;
+  --icon-bg: #2d3548;
+  --icon-border: #374151;
+  --icon-bg-hover: #374151;
+  --icon-border-hover: #10b981;
+}
+
+body {
+  font-family: 'Epilogue', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+}
+
