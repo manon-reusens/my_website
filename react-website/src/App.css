@@ -7,7 +7,8 @@
 }
 
 /* CSS Variables for Light Mode */
-:root {
+:root,
+[data-theme='light'] {
   --color-accent-primary: #059669;
   --color-accent-secondary: #ea580c;
   --color-highlight-primary: rgba(5, 150, 105, 0.1);

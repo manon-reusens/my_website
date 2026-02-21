@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
-import { useTheme } from './hooks/useTheme';
+import { ThemeProvider, useTheme } from './contexts/ThemeContext';
 import MainLayout from './components/MainLayout';
 import Home from './pages/Home';
 import Publications from './pages/Publications';
@@ -13,7 +13,7 @@ import { lightTheme, darkTheme } from './utils/theme';
 import './App.css';
 import './styles.css';
 
-function App() {
+function AppContent() {
   const { theme } = useTheme();
 
   return (
@@ -32,6 +32,14 @@ function App() {
         </MainLayout>
       </Router>
     </ConfigProvider>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
 

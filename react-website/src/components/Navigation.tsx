@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Layout as AntLayout, Button, Drawer, Menu, Space, Avatar } from 'antd';
 import { MenuOutlined, BulbOutlined, BulbFilled } from '@ant-design/icons';
-import { useTheme } from '../hooks/useTheme';
+import { useTheme } from '../contexts/ThemeContext';
 
 const { Header } = AntLayout;
 
