@@ -11,10 +11,9 @@ interface MainLayoutProps {
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
-    <AntLayout style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <AntLayout style={{ minHeight: '100vh' }}>
       <Navigation />
       <Content style={{ 
-        flex: 1,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',

@@ -11,6 +11,13 @@ export const useTheme = () => {
   useEffect(() => {
     localStorage.setItem('theme', theme);
     document.documentElement.setAttribute('data-theme', theme);
+    
+    // Update body background to match theme
+    if (theme === 'dark') {
+      document.body.style.backgroundColor = '#1a1f2e';
+    } else {
+      document.body.style.backgroundColor = '#f9fafb';
+    }
   }, [theme]);
 
   const toggleTheme = () => {

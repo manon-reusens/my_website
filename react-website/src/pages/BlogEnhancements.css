@@ -1,0 +1,276 @@
+/* Blog-specific global enhancements */
+
+/* Gradient text animation */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-gradient-text {
+  background: linear-gradient(
+    45deg,
+    #667eea,
+    #764ba2,
+    #f093fb,
+    #4facfe,
+    #667eea
+  );
+  background-size: 300% 300%;
+  animation: gradient-shift 8s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Shimmer effect for featured cards */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.featured-blog-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 3s infinite;
+  pointer-events: none;
+}
+
+/* Card hover glow effect */
+.blog-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  box-shadow: 0 0 30px rgba(102, 126, 234, 0.4);
+}
+
+.blog-card:hover::after {
+  opacity: 1;
+}
+
+/* Pulse animation for featured badge */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+.featured-badge {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Reading progress bar */
+.reading-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  z-index: 1000;
+  transition: width 0.1s ease-out;
+}
+
+/* Smooth reveal for content sections */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-on-scroll {
+  animation: reveal 0.8s ease-out;
+}
+
+/* Floating animation for icons */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.floating-icon {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Code block enhancements */
+.markdown-body pre {
+  position: relative;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.markdown-body pre::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-radius: 8px 8px 0 0;
+}
+
+.markdown-body pre code {
+  margin-top: 30px;
+  display: block;
+}
+
+/* Tag hover effects */
+.ant-tag {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.ant-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Scroll-triggered animations */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Background patterns */
+.blog-background-pattern {
+  background-image: 
+    radial-gradient(circle at 25px 25px, rgba(102, 126, 234, 0.05) 2%, transparent 0%),
+    radial-gradient(circle at 75px 75px, rgba(118, 75, 162, 0.05) 2%, transparent 0%);
+  background-size: 100px 100px;
+  background-position: 0 0, 50px 50px;
+}
+
+/* Tooltip styling for blog cards */
+.blog-card-tooltip {
+  max-width: 300px;
+  font-size: 0.9em;
+}
+
+/* Share buttons styling */
+.share-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.share-button {
+  transition: all 0.3s ease;
+}
+
+.share-button:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Reading time indicator */
+.reading-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+  border-radius: 16px;
+  font-size: 0.85em;
+}
+
+/* Parallax effect for cover images */
+.parallax-cover {
+  transform: translateZ(0);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.parallax-cover:hover {
+  transform: scale(1.05);
+}
+
+/* Typography enhancements */
+.blog-post-content {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.blog-post-content p:first-letter {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #667eea;
+}
+
+/* Dark mode transitions */
+[data-theme='dark'] .blog-card,
+[data-theme='dark'] .blog-post-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .blog-card:hover {
+    transform: translateY(-4px);
+  }
+  
+  .blog-card::after {
+    display: none;
+  }
+}
+
+/* Print styles for blog posts */
+@media print {
+  .blog-post-card {
+    box-shadow: none;
+    border: 1px solid #e8e8e8;
+  }
+  
+  .markdown-body pre::before {
+    display: none;
+  }
+  
+  .blog-post-meta,
+  .related-posts-card {
+    page-break-inside: avoid;
+  }
+}

@@ -20,6 +20,7 @@ const Navigation: React.FC<NavigationProps> = ({ logoSrc = '/MR-logo.png' }) => 
     { key: '/publications', label: 'Publications' },
     { key: '/talks', label: 'Talks' },
     { key: '/teaching', label: 'Teaching' },
+    { key: '/blog', label: 'Blog' },
     { key: '/cv', label: 'CV' },
   ];
 

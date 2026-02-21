@@ -147,3 +147,17 @@ export interface FilterOptions {
   excludeTalkIds?: string[];
   excludePredicate?: ((item: any) => boolean) | null;
 }
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  date: string;
+  author: string;
+  excerpt: string;
+  content: string;
+  tags: string[];
+  coverImage?: string;
+  readTime?: string;
+  category?: string;
+  featured?: boolean;
+}
