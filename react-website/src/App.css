@@ -19,22 +19,22 @@
   --color-surface-elevated: #f3f4f6;
   --color-border: #e5e7eb;
   --color-background: #f9fafb;
-  --transition-speed: 0.3s;
+  --transition-speed: 0.05s;
   
   /* Icon variables */
-  --icon-fg: #374151;
-  --icon-bg: #f3f4f6;
-  --icon-border: #e5e7eb;
-  --icon-bg-hover: #e5e7eb;
-  --icon-border-hover: #059669;
+  --icon-fg: #ff7a00;
+  --icon-bg: #fff7f0;
+  --icon-border: #ffd9b3;
+  --icon-bg-hover: #ffe8d6;
+  --icon-border-hover: #ffc99c;
 }
 
 /* CSS Variables for Dark Mode */
 [data-theme='dark'] {
   --color-accent-primary: #10b981;
   --color-accent-secondary: #d97706;
-  --color-highlight-primary: rgba(16, 185, 129, 0.15);
-  --color-highlight-secondary: rgba(217, 119, 6, 0.15);
+  --color-highlight-primary: rgba(16, 185, 129, 0.1);
+  --color-highlight-secondary: rgba(217, 119, 6, 0.12);
   --color-text-primary: #e6edf3;
   --color-text-secondary: #9ca3af;
   --color-surface: #232936;
@@ -44,10 +44,10 @@
   
   /* Icon variables */
   --icon-fg: #e6edf3;
-  --icon-bg: #2d3548;
-  --icon-border: #374151;
-  --icon-bg-hover: #374151;
-  --icon-border-hover: #10b981;
+  --icon-bg: rgba(255,255,255,0.06);
+  --icon-border: rgba(255,255,255,0.12);
+  --icon-bg-hover: rgba(255,255,255,0.12);
+  --icon-border-hover: rgba(255,255,255,0.18);
 }
 
 body {
