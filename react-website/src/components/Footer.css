@@ -1,0 +1,12 @@
+.site-footer {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+  padding: 2rem 0;
+  margin-top: 4rem;
+}
+
+.site-footer p {
+  color: var(--color-text-secondary);
+  margin: 0;
+}

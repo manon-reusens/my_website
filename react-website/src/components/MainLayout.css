@@ -1,0 +1,10 @@
+.main-layout {
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+
+.main-content {
+  padding-top: 7rem;
+  min-height: calc(100vh - 200px);
+  background: transparent;
+}

@@ -1,0 +1,84 @@
+.teaching-page {
+  padding-bottom: 3rem;
+}
+
+.teaching-section {
+  margin: 2.5rem 0;
+}
+
+.section-title {
+  color: var(--color-accent-primary);
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+}
+
+.teaching-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.teaching-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.teaching-year {
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+.teaching-card h3 {
+  margin: 0.75rem 0 0.5rem;
+  font-size: 1.3rem;
+}
+
+.parent-course {
+  color: var(--color-text-secondary);
+  font-style: italic;
+  margin: 0.25rem 0;
+}
+
+.teaching-institution {
+  color: var(--color-text-secondary);
+  margin: 0.25rem 0;
+  font-weight: 500;
+}
+
+.teaching-meta {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.teaching-responsibilities {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: var(--color-surface-elevated);
+  border-radius: 8px;
+}
+
+.teaching-responsibilities h4 {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  color: var(--color-accent-primary);
+}
+
+.teaching-responsibilities ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.teaching-responsibilities li {
+  margin: 0.5rem 0;
+}
+
+.teaching-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}

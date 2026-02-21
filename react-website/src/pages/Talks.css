@@ -1,0 +1,80 @@
+.talks-page {
+  padding-bottom: 3rem;
+}
+
+.year-section {
+  margin: 2rem 0;
+}
+
+.year-header {
+  color: var(--color-accent-primary);
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+.talk-card {
+  height: 100%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.talk-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.talk-date {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}
+
+.talk-card h3 {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.talk-event {
+  color: var(--color-text-secondary);
+  margin: 0.5rem 0;
+}
+
+.talk-duration {
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.talk-more-info {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--color-surface-elevated);
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.talk-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 1rem 0;
+}
+
+.talk-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.talk-links a {
+  color: var(--color-accent-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.talk-links a:hover {
+  color: var(--color-accent-secondary);
+}
