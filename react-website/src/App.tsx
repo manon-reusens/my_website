@@ -12,6 +12,8 @@ import BlogPost from './pages/BlogPost';
 import { lightTheme, darkTheme } from './utils/theme';
 import './App.css';
 import './styles.css';
+import { ScrollToTop } from './ScrollToTop';
+
 
 function AppContent() {
   const { theme } = useTheme();
@@ -19,6 +21,7 @@ function AppContent() {
   return (
     <ConfigProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
       <Router>
+        <ScrollToTop />
         <MainLayout>
           <Routes>
             <Route path="/" element={<Home />} />
