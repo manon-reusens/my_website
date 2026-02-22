@@ -109,7 +109,7 @@ const Blog: React.FC = () => {
                         backgroundImage: `url(${blog.coverImage})`,
                         height: 200,
                         backgroundSize: 'cover',
-                        backgroundPosition: 'center'
+                        backgroundPosition: 'left'
                       }} />
                     ) : (
                       <div className="blog-card-placeholder" style={{ 
