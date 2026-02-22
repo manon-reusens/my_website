@@ -112,7 +112,7 @@ const BlogPost: React.FC = () => {
         {/* Cover Image */}
         {blog.coverImage && (
           <div className="blog-post-cover">
-            <img src={blog.coverImage} alt={blog.title} />
+            <img src={`url(${blog.coverImage})`} alt={blog.title} />
           </div>
         )}
 
