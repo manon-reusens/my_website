@@ -11,7 +11,7 @@ export const blogsData: BlogPost[] = [
     category: "General",
     tags: ["Welcome", "AI Research", "Industry"],
     featured: true,
-    coverImage: "images/Quote-welcome-blog.png",
+    coverImage: "/images/Quote-welcome-blog.png",
     content: `# Welcome to My Blog!
 
 Hello and welcome! I'm excited to launch this blog as a space to share my thoughts, research, and experiences in the world of Artificial Intelligence.
@@ -54,7 +54,7 @@ Happy reading! 🚀
     category: "Research",
     tags: ["LLMs", "Bias", "Fairness", "Responsible AI"],
     featured: true,
-    coverImage: "images/Quote-thesis-blog.png",
+    coverImage: "/images/Quote-thesis-blog.png",
     content: `# Language Models Are Not Neutral
 
 **_Language models like ChatGPT are extremely popular, but they are not neutral. Their answers often reflect the people who built them and that is rarely a representative group of the world’s population. In my PhD thesis, I show how social inequalities find their way into language models, and why that affects everyone._**
@@ -65,7 +65,7 @@ The answer? A man, technically educated, white, from Silicon Valley.
 No woman, no one from the Global South, no social entrepreneur... Why not?
 Because language models base their responses on patterns in data and that data comes mostly from English‑language, Western sources. As a result, existing power structures are quietly repeated and reinforced, under the guise of objective technology.
 
-![Representation LLM](images/ThesisFig1.png "Representation LLM")
+![Representation LLM](/images/ThesisFig1.png "Representation LLM")
 
 In my thesis, I show that these social inequalities stem from how the model is built. The choices made by designers and the selection of training data all contribute to subtle forms of bias. These biases are not only products of modern society, they can also originate from the past.
 Together with the National Museum of the Royal Navy, we analyzed how models can make historical archives more accessible via keywords. Original descriptions would be manually composed by the curators based on their expert knowledge and would then be given to an LLM for keyword extraction. Even when terms like <b>"war trophy"</b> were deliberately avoided in the original descriptions, language models still generated such war‑related terms as keywords. Thus, a colonial perspective that is supposedly relegated to history, can be revived through modern technology.
@@ -79,7 +79,7 @@ In our research, we found that models given a specific personality are mostly co
 Bias is not abstract, it has real consequences.
 One of our studies showed this clearly, investigating how different users may not receive equally accurate answers. An example is shown below with two annotations, one of a native English speaker and one of a non-native English speaker. The same query produces a more accurate answer for the native speaker, while the non‑native speaker receives a less accurate response. This is an example of what I call "native design bias" in language models, and it can affect millions of non‑native speakers worldwide. 
 
-![Example Native Bias](images/ThesisFig2.png "Example Native Bias")
+![Example Native Bias](/images/ThesisFig2.png "Example Native Bias")
 
 Furthermore, even among native English speakers, performance differences arise when splitting them into Western and non‑Western groups. Although performance should be identical, this is not always the case:
 

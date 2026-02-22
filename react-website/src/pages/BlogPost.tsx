@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Card, Button, Tag, Typography, Space, Divider, Avatar } from 'antd';
+import { Card, Button, Tag, Typography, Space, Divider, Avatar, Image } from 'antd';
 import { 
   ArrowLeftOutlined, 
   CalendarOutlined, 
@@ -110,10 +110,10 @@ const BlogPost: React.FC = () => {
         <Divider />
 
         {/* Cover Image */}
+        
+
         {blog.coverImage && (
-          <div className="blog-post-cover">
-            <img src={`url(${blog.coverImage})`} alt={blog.title} />
-          </div>
+          <Image src={blog.coverImage} alt={blog.title} className="blog-post-cover" />
         )}
 
         {/* Excerpt */}
