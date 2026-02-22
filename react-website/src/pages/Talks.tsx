@@ -22,7 +22,6 @@ const Talks: React.FC = () => {
       if (!location.hash) return;
       // Remove leading "#"
       const targetId = location.hash.slice(1);
-      const headerOffset = 88;
       // Give the DOM a tick to render the list (especially on slow devices)
       const t = setTimeout(() => {
         const el = document.getElementById(targetId);

@@ -1,6 +1,6 @@
 // ScrollToTop.tsx
 import { useEffect } from 'react';
-import { useLocation, NavigationType } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 export function ScrollToTop() {
   const location = useLocation();
