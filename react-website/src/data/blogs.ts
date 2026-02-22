@@ -11,7 +11,7 @@ export const blogsData: BlogPost[] = [
     category: "General",
     tags: ["Welcome", "AI Research", "Industry"],
     featured: true,
-    coverImage: "../public/images/Quote-welcome-blog.png",
+    coverImage: "images/Quote-welcome-blog.png",
     content: `# Welcome to My Blog!
 
 Hello and welcome! I'm excited to launch this blog as a space to share my thoughts, research, and experiences in the world of Artificial Intelligence.
