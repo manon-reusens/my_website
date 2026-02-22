@@ -30,7 +30,7 @@ export const NewsGenerator = {
           title: `${talk.type}: ${talk.event}`,
           description: (talk.description || '').substring(0, 200) + (talk.description && talk.description.length > 200 ? '...' : ''),
           type: "talk",
-          link: `/talk/${talk.id}`,
+          link: `/talks#${talk.id}`,
           sortDate: talk.date,
           talkId: talk.id,
           hiddenFromNews: !!talk.hiddenFromNews

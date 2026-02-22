@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card, Tag, Row, Col, Typography, Space, Divider, Button } from 'antd';
 import { websiteConfig } from '../data/config';
 import { TalksAPI } from '../data/talks';
@@ -6,6 +6,7 @@ import { formatDate } from '../utils/helpers';
 import './Talks.css';
 import './Blog.css';
 import './BlogEnhancements.css';
+import { useLocation } from 'react-router-dom';
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -13,6 +14,29 @@ const Talks: React.FC = () => {
   const { personal, keynote } = websiteConfig;
   const groupedByYear = TalksAPI.groupByYear({ excludeIds: ['custom-topics'] });
   const years = Object.keys(groupedByYear).sort((a, b) => Number(b) - Number(a));
+  
+  const location = useLocation();
+    // ...your existing code that computes groupedByYear & years
+
+    useEffect(() => {
+      if (!location.hash) return;
+      // Remove leading "#"
+      const targetId = location.hash.slice(1);
+      const headerOffset = 88;
+      // Give the DOM a tick to render the list (especially on slow devices)
+      const t = setTimeout(() => {
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          el.classList.add('talk-highlight');
+          // remove the highlight after a moment
+          setTimeout(() => el.classList.remove('talk-highlight'), 1400);
+        }
+      }, 0);
+
+      return () => clearTimeout(t);
+    }, [location.hash]);
+
 
   return (
     <Space orientation="vertical" size="large" style={{ width: '100%', maxWidth: 1200 }}>
@@ -61,7 +85,7 @@ const Talks: React.FC = () => {
           <Row gutter={[16, 16]}>
             {groupedByYear[year].map((talk) => (
               <Col key={talk.id} xs={24} lg={12}>
-                <Card className="publication-card" hoverable>
+                <Card id={talk.id} className="talk-card" hoverable>
                   <Space orientation="vertical" size="small" style={{ width: '100%' }}>
                     <Space>
                       <Tag className={talk.type === 'Keynote' || talk.type === 'Invited Talk' ? 'tag tag-secondary' : 'tag tag-primary'}>{talk.type}</Tag>
