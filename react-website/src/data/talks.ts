@@ -12,7 +12,6 @@ export const talksData: Talk[] = [
     location: "Leuven, Belgium",
     description: "Invited by KBC to present research on social bias in large language models.",
     links: {
-      event: "https://feb.kuleuven.be/orbel40"
     }
   },{
     id: "talk-2026-02-orbel",
