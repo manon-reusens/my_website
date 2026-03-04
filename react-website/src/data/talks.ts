@@ -2,6 +2,19 @@ import type { Talk, FilterOptions } from '../types';
 
 export const talksData: Talk[] = [
   {
+    id: "talk-2026-03-kbc",
+    date: "2026-02-06",
+    title: "Social Bias in Large Language Models",
+    type: "Invited Talk",
+    duration: '1 hour',
+    event: "Knowledge Sharing Session, KBC",
+    image: "images/persona.png",
+    location: "Leuven, Belgium",
+    description: "Invited by KBC to present research on social bias in large language models.",
+    links: {
+      event: "https://feb.kuleuven.be/orbel40"
+    }
+  },{
     id: "talk-2026-02-orbel",
     date: "2026-02-06",
     title: "Consistency in Persona-Assigned LLMs",
