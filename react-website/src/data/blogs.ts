@@ -128,7 +128,7 @@ Only then can we ensure that this powerful technology is not just efficient, but
     tags: ["Research", "Large Language Models", "Willingness to Pay", "Automated decision-making"],
     featured: true,
     coverImage: "/images/Automated_Decision_Making.png",
-    content: `# WWould a Large Language Model Pay Extra for a View?
+    content: `# Would a Large Language Model Pay Extra for a View?
 Consider the example depicted above.
 
 An AI Agent is tasked with booking a hotel room in hotel X in Antwerp Belgium for one night for a user. The agent can use some tools to execute this task, for example looking on the internet for availabilities in the hotel on this date. The agent finds that the hotel still has two rooms available:
