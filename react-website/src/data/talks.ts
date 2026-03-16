@@ -3,7 +3,7 @@ import type { Talk, FilterOptions } from '../types';
 export const talksData: Talk[] = [
   {
     id: "talk-2026-03-kbc",
-    date: "2026-02-06",
+    date: "2026-03-02",
     title: "Social Bias in Large Language Models",
     type: "Invited Talk",
     duration: '1 hour',

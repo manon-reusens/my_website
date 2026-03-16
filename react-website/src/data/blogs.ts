@@ -53,7 +53,7 @@ Happy reading! 🚀
     readTime: "5 min read",
     category: "Research",
     tags: ["LLMs", "Bias", "Fairness", "Responsible AI"],
-    featured: true,
+    featured: false,
     coverImage: "/images/Quote-thesis-blog.png",
     content: `# Language Models Are Not Neutral
 
@@ -117,72 +117,86 @@ If we want to build language models that truly work for everyone, we need to thi
 Only then can we ensure that this powerful technology is not just efficient, but also fair and inclusive.
 `
   },
-//   {
-//     id: "phd-journey-reflections",
-//     title: "Reflections on My PhD Journey",
-//     date: "2026-01-10",
-//     author: "Manon Reusens",
-//     excerpt: "Looking back at the challenges, triumphs, and lessons learned during my doctoral research.",
-//     readTime: "6 min read",
-//     category: "Academia",
-//     tags: ["PhD", "Academia", "Personal", "Research"],
-//     featured: false,
-//     content: `# Reflections on My PhD Journey
+  {
+    id: "what-would-an-llm-pay-for-a-hotel-room",
+    title: "Would a Large Language Model Pay Extra for a View?",
+    date: "2026-03-16",
+    author: "Manon Reusens",
+    excerpt: "This blog post summarizes my research on the willingness of large language models to pay for hotel rooms.",
+    readTime: "6 min read",
+    category: "Research",
+    tags: ["Research", "Large Language Models", "Willingness to Pay", "Automated decision-making"],
+    featured: true,
+    coverImage: "/images/Automated_Decision_Making.png",
+    content: `# WWould a Large Language Model Pay Extra for a View?
+Consider the example depicted above.
 
-// After completing my PhD at KU Leuven, I wanted to share some reflections on the journey, the challenges I faced, and what I learned along the way.
+An AI Agent is tasked with booking a hotel room in hotel X in Antwerp Belgium for one night for a user. The agent can use some tools to execute this task, for example looking on the internet for availabilities in the hotel on this date. The agent finds that the hotel still has two rooms available:
+* one hotel room with a city view for €50 
+* one hotel roomwith a harbor view for €100.
 
-// ## The Beginning
+If this is the only information that the agent has, it might decide to book the city view room for €50, as it is the cheaper option and meets the basic requirement of being a room in hotel X. 
 
-// Starting a PhD is both exciting and daunting. When I began my research on Large Language Models and responsible AI, the field was rapidly evolving...
+However, if the agent has access to more information about the **user's preferences, budget, and past behavior**, it might decide to book the harbor view room for €100, as it might be more aligned with the user's preferences and willingness to pay.
+This is also depicted on the figure below, where the agent uses this information to make a decision that is more personalized and potentially more satisfying for the user, even if it is not the cheapest option available.
+![Automated Decision Making with User Information](/images/Automated_Decision_Making2.png "Automated Decision Making with User Information")
 
-// ## Key Challenges
+Building on this idea, we explore how Large Language Models(LLMs) make decisions and trade-offs in our latest research paper [Would a Large Language Model Pay Extra for a View? Inferring Willingness to Pay from Subjective Choices](https://arxiv.org/pdf/2602.09802), we investigate the willingness to pay (WTP) of LLMs for different features of hotel rooms and how it compares to human WTP values. 
+Our results show that while larger LLMs produce coherent WTP estimates, they often overvalue several features. We also find that these valuations can be influenced through thoughtful prompt design. Given that LLMs are in general willing to pay more than humans, adding previous choices of customers improves human alignment when these choices were made in favor of cheaper rooms.
 
-// ### 1. Imposter Syndrome
-// Every PhD student faces this. The key is recognizing that it's normal and that you *do* belong in academia.
+Below, you can find a general outline of our methodology and results and the practical implications of our findings for practitioners who want to use LLMs for automated decision making.
 
-// ### 2. Scope Management
-// Learning to say "no" and focusing on what truly matters for your thesis is crucial.
+## Our Methodology
+Below, you find a concise overview of the main steps we took to derive WTP values from LLMs and compare them to human WTP values.
 
-// ### 3. Work-Life Balance
-// Research can be all-consuming. Finding balance is essential for long-term success and well-being.
+1. We gathered hotel room features based on a human study to generate dilemmas that different LLMs would have to solve.
+2. We prompted LLMs to make choices between the different hotel room options for all generated dilemmas. 
+3. Based on these choices, we used a multinomial logit model, often used in behavioral economics, to approximate the preferences of LLMs.
+4. We derived the WTP values based on the estimated multinomial logit model and compared them to human WTP values.
 
-// ## Memorable Moments
+## Results
+We conducted our experiments in several stages. We began by analyzing the plain LLM responses, meaning the model had no information about the user’s preferences or past choices.
+![WTP without User Information](/images/WTP_no_info.png "WTP without User Information")
 
-// - First paper acceptance 🎉
-// - Presenting at international conferences
-// - Collaborating with brilliant researchers
-// - Those "aha!" moments when everything clicks
+These initial results highlight that, for several features, there are substantial gaps between human WTP values (shown by the red dashed line) and the LLM‑derived WTP values (the bars). One of the clearest examples is the hotel club access feature, which LLMs consistently overvalue. Interestingly, when we shortened the description of what “hotel club access” includes, the models’ valuations dropped. This demonstrates how sensitive LLMs are to prompt phrasing and how targeted wording can nudge them closer to desired behavior.
+In general, we also see differences in specific LLM behavior. For example, Gemini-3-pro seems most aligned with human behavior overall, while Llama 3.3 70B seems least aligned.
 
-// ## Advice for Future PhD Students
+Next, we examined what happens when we introduce user information—specifically, data on user preferences and previous choices. Since LLMs tend to overestimate WTP in general, providing user histories that favor cheaper rooms helps pull their valuations closer to human levels. However, adding user profiles does not always improve nuance. In fact, in some cases, especially with Gemini‑3‑pro, the valuations become too extreme.
+This shows that while user information can enhance alignment, it can also lead to oversimplification. In other words, personalization can help, but it needs to be handled carefully when LLMs are used for automated decision‑making tasks.
 
-// 1. **Build a support network**: Fellow PhD students, mentors, and friends are invaluable
-// 2. **Embrace failure**: Every rejected paper is a learning opportunity
-// 3. **Stay curious**: Let your curiosity guide your research
-// 4. **Take care of yourself**: Your mental and physical health come first
-// 5. **Celebrate small wins**: Don't wait for the big milestones
+## Practical Implications
+Our study comes with several practical implications for practitioners who want to use LLMs for automated decision making:
+> 1. Smaller models are less suitable for automated decision making.
 
-// ## What's Next?
+Although it might be easier to implement a smaller model, given its lower compute requirements, it is important to be aware that these smaller models are often more influenced by the order bias.
+Therefore, they might be - for now - less suitable for automated decision making. 
 
-// The PhD is just the beginning. I'm excited to continue contributing to responsible AI and working on making AI systems more fair and beneficial for everyone.
+> 2. LLMs can be steered to act as how you prefer.
 
-// ## Final Thoughts
+LLMs are highly prompt sensitive. That means that the way a question is posed or a statement is phrased, highly influences the final response.
+Therfore, careful prompt formulation can steer LLMs to act according to your preferences. For example, in our study, we were able to steer the LLMs to put less value on the hotel club access by shortening the description of what "hotel club access" includes.
+However, this also means that practitioners should be careful when implementing LLMs for automated decision making, as the way the prompt is formulated can have a big impact on the final response of the LLM.
 
-// Would I do it again? Absolutely. The PhD taught me resilience, critical thinking, and the value of perseverance. It's a unique journey that shaped who I am as a researcher and person.
+> 3. Carefully create user profiles
+ 
+Adding user information can help LLMs better align with human preferences, but it can also reduce nuance and oversimplify what a user actually wants. This means that user profiles should be applied carefully when personalizing automated decisions.
 
-// To all current and future PhD students: you've got this! 💪
-// `
-//   },
-//   {
-//     id: "getting-started-with-responsible-ai",
-//     title: "Getting Started with Responsible AI",
-//     date: "2025-12-05",
-//     author: "Manon Reusens",
-//     excerpt: "A practical guide for developers and researchers who want to build more ethical AI systems.",
-//     readTime: "7 min read",
-//     category: "Tutorial",
-//     tags: ["Responsible AI", "Ethics", "Tutorial", "Best Practices"],
-//     featured: false,
-//     content: `# Getting Started with Responsible AI
+These specific implications can be synthesized into a more general finding, namely that practitioners should be careful when implementing LLMs for automated decision-making and that thorough testing of their pipelines is required.
+
+
+`
+  },
+  // {
+  //   id: "getting-started-with-responsible-ai",
+  //   title: "Getting Started with Responsible AI",
+  //   date: "2025-12-05",
+  //   author: "Manon Reusens",
+  //   excerpt: "A practical guide for developers and researchers who want to build more ethical AI systems.",
+  //   readTime: "7 min read",
+  //   category: "Tutorial",
+  //   tags: ["Responsible AI", "Ethics", "Tutorial", "Best Practices"],
+  //   featured: false,
+  //   content: `# Getting Started with Responsible AI
 
 // If you're building AI systems, you have a responsibility to ensure they're fair, transparent, and beneficial. Here's a practical guide to get started.
 
