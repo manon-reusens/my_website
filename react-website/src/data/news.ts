@@ -23,7 +23,7 @@ export const NewsGenerator = {
 
     // Talks -> news (Keynotes + Invited Talks + Conference Presentations)
     talksData.forEach(talk => {
-      if (talk.type === 'Keynote' || talk.type === 'Invited Talk' || talk.type === 'Conference Presentation') {
+      if (talk.type === 'Keynote' || talk.type === 'Invited Talk' || talk.type === 'Conference Presentation'|| talk.type === 'Research Pitch') {
         news.push({
           id: `talk-${talk.id}`,
           date: NewsGenerator.formatDate(talk.date),
