@@ -25,6 +25,17 @@ export const teachingData: TeachingData = {
   
   guestLectures: [
     {
+      id: "guest-2026-social-bias",
+      role: "Guest Lecturer",
+      course: "Social Bias in Large Language Models",
+      institution: "UAntwerpen, Department of Business and Economics",
+      year: 2026,
+      parentCourse: "Current Topics in Data Science and AI",
+      ects: 3,
+      level: "Graduate",
+      description: "Guest lecture Social bias in Large Language Models, explaining which types of social bias may occur and how you can debias it.",
+      tags: ["Social Bias", "Large Language Models", "Responsible AI"]
+    },{
       id: "guest-2025-ml",
       role: "Guest Lecturer",
       course: "Machine Learning",

@@ -2,13 +2,24 @@ import type { Talk, FilterOptions } from '../types';
 
 export const talksData: Talk[] = [
   {
+    id: "talk-2026-03-acrai",
+    date: "2026-03-19",
+    title: "Would a Large Language Model Pay Extra for a View? Inferring Willingness to Pay from Subjective Choice",
+    type: "Research Pitch",
+    duration: '10 minutes',
+    event: "ACRAI Research Day, UAntwerpen",
+    location: "Antwerp, Belgium",
+    description: "I presented my recent research on inferring willingness to pay within Large Language Models.",
+    links: {
+    }
+  },
+  {
     id: "talk-2026-03-kbc",
     date: "2026-03-02",
     title: "Social Bias in Large Language Models",
     type: "Invited Talk",
     duration: '1 hour',
     event: "Knowledge Sharing Session, KBC",
-    image: "images/persona.png",
     location: "Leuven, Belgium",
     description: "Invited by KBC to present research on social bias in large language models.",
     links: {
