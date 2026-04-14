@@ -25,6 +25,17 @@ export const teachingData: TeachingData = {
   
   guestLectures: [
     {
+      id: "guest-2026-llm",
+      role: "Guest Lecturer",
+      course: "Large Language Models",
+      institution: "UHasselt, Department of Business and Economics",
+      year: 2026,
+      parentCourse: "Data Science for Business",
+      ects: 3,
+      level: "Graduate",
+      description: "Guest lecture on large language models, covering their workings, use cases, and risks.",
+      tags: ["Large Language Models", "Agents",'Risks of LLMs']
+    },{
       id: "guest-2026-social-bias",
       role: "Guest Lecturer",
       course: "Social Bias in Large Language Models",
