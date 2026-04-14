@@ -31,7 +31,7 @@ export const teachingData: TeachingData = {
       institution: "UHasselt, Department of Business and Economics",
       year: 2026,
       parentCourse: "Data Science for Business",
-      ects: 3,
+      ects: 6,
       level: "Graduate",
       description: "Guest lecture on large language models, covering their workings, use cases, and risks.",
       tags: ["Large Language Models", "Agents",'Risks of LLMs']
