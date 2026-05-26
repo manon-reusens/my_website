@@ -20,6 +20,23 @@ export const publicationsData: Publication[] = [
     featured: false
   },
   {
+    id: "ipm-2026-cyberbullying",
+    type: "journal",
+    title: "A benchmark framework for detecting cyberbullying: Conceptual and operational definitions, dataset development, and methods evaluation",
+    authors: ["Xiaoting Yang", "Wei Lv", "Manon Reusens", "Baosheng Zhang","Bart Baesens"],
+    year: 2026,
+    date: "2026-12-01",
+    venue: "arXiv",
+    venueType: "Information Processing & Management",
+    description: "This paper introduces a comprehensive benchmark framework for cyberbullying detection, encompassing conceptual and operational definitions, dataset development, and method evaluation to advance research in this critical area.",
+    tags: ["Cyberbullying detection", "Benchmark", "Multimodal dataset"],
+    links: {
+      paper: "https://www.sciencedirect.com/science/article/pii/S0306457326002943"
+    },
+    emoji: "💻",
+    featured: true
+  },
+  {
     id: "preprint-2026-WTP",
     type: "preprint",
     title: "Would a Large Language Model Pay Extra for a View? Inferring Willingness to Pay from Subjective Choices",
