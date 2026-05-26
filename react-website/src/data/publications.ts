@@ -26,8 +26,8 @@ export const publicationsData: Publication[] = [
     authors: ["Xiaoting Yang", "Wei Lv", "Manon Reusens", "Baosheng Zhang","Bart Baesens"],
     year: 2026,
     date: "2026-12-01",
-    venue: "arXiv",
-    venueType: "Information Processing & Management",
+    venue: "Information Processing & Management",
+    venueType: "Journal Article",
     description: "This paper introduces a comprehensive benchmark framework for cyberbullying detection, encompassing conceptual and operational definitions, dataset development, and method evaluation to advance research in this critical area.",
     tags: ["Cyberbullying detection", "Benchmark", "Multimodal dataset"],
     links: {
