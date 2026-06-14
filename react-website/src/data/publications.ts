@@ -38,18 +38,17 @@ export const publicationsData: Publication[] = [
   },
   {
     id: "preprint-2026-WTP",
-    type: "preprint",
+    type: "journal",
     title: "Would a Large Language Model Pay Extra for a View? Inferring Willingness to Pay from Subjective Choices",
     authors: ["Manon Reusens", "Sofie Goethals", "Toon Calders", "David Martens"],
     year: 2026,
-    date: "2026-02-10",
-    venue: "arXiv",
-    venueType: "Preprint",
+    date: "2026-06-12",
+    venue: "Expert Systems with Applications",
+    venueType: "Journal Article",
     description: "We introduce an economic evaluation framework that applies willingness-to-pay modeling to assess preference alignment in Large Language Models.",
     tags: ["Large Language Models", "Willingness to Pay", "Preference Alignment"],
     links: {
-      arxiv: "https://arxiv.org/abs/2602.09802",
-      pdf: "https://arxiv.org/pdf/2602.09802"
+      paper: "https://www.sciencedirect.com/science/article/abs/pii/S0957417426021883",
     },
     emoji: "🏨",
     featured: true
@@ -69,7 +68,7 @@ export const publicationsData: Publication[] = [
       paper: "https://www.tandfonline.com/doi/abs/10.1080/2573234X.2025.2551951"
     },
     emoji: "🤖",
-    featured: true
+    featured: false
   },
   {
     id: "aisociety-2025-museums",
