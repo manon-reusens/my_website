@@ -42,7 +42,7 @@ export const publicationsData: Publication[] = [
     title: "Would a Large Language Model Pay Extra for a View? Inferring Willingness to Pay from Subjective Choices",
     authors: ["Manon Reusens", "Sofie Goethals", "Toon Calders", "David Martens"],
     year: 2026,
-    date: "2026-06-12",
+    date: "2026-12-15",
     venue: "Expert Systems with Applications",
     venueType: "Journal Article",
     description: "We introduce an economic evaluation framework that applies willingness-to-pay modeling to assess preference alignment in Large Language Models.",

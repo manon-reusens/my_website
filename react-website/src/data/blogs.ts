@@ -158,30 +158,42 @@ Below, you find a concise overview of the main steps we took to derive WTP value
 We conducted our experiments in several stages. We began by analyzing the plain LLM responses, meaning the model had no information about the user’s preferences or past choices.
 ![WTP without User Information](/images/WTP_no_info.png "WTP without User Information")
 
-These initial results highlight that, for several features, there are substantial gaps between human WTP values (shown by the red dashed line) and the LLM‑derived WTP values (the bars). One of the clearest examples is the hotel club access feature, which LLMs consistently overvalue. Interestingly, when we shortened the description of what “hotel club access” includes, the models’ valuations dropped. This demonstrates how sensitive LLMs are to prompt phrasing and how targeted wording can nudge them closer to desired behavior.
-In general, we also see differences in specific LLM behavior. For example, Gemini-3-pro seems most aligned with human behavior overall, while Llama 3.3 70B seems least aligned.
+These initial results highlight that there are large differences between the WTP values of the different LLMs. In the figure, we also include the human benchmark as a reference to interpret the individual WTP values. 
+Across the different LLMs, we do find some extreme behavior for specific features and in general Llama 3.3 70B and GPT-4o provide larger estimates than Gemini-3.1-Pro. 
 
-Next, we examined what happens when we introduce user information—specifically, data on user preferences and previous choices. Since LLMs tend to overestimate WTP in general, providing user histories that favor cheaper rooms helps pull their valuations closer to human levels. However, adding user profiles does not always improve nuance. In fact, in some cases, especially with Gemini‑3‑pro, the valuations become too extreme.
-This shows that while user information can enhance alignment, it can also lead to oversimplification. In other words, personalization can help, but it needs to be handled carefully when LLMs are used for automated decision‑making tasks.
+Next, we examined whether including user information, i.e. data on user preferences and previous choices, shifts the WTP values. We find that by adding this information, it is possible to shift the values both upward and downward. Moreover, some of these settings actually introduce extreme model behavior.
+
+Finally, we examine the robustness of our results by analyzing order effects, prompt perturbation, currency changes, and different temperature settings. We find in general that LLMs are highly sensitive to these changes, especially in terms of order switching and paraphrasing. However, this spread was largely model-dependent, with Gemini-3.1-Pro displaying the most robust behavior. 
+The most striking difference occurs in terms of positive feature framing. Including or removing a positive framing of a feature can lead to a significant change in WTP values for that feature across all models. 
 
 ## Practical Implications
 Our study comes with several practical implications for practitioners who want to use LLMs for automated decision making:
-> 1. Smaller models are less suitable for automated decision making.
+> 1. Transparency in LLM-decision making.
+ 
+Our method allows us to derive WTP values from LLMs, which can be used to explain the decision-making process of LLMs. Given the increasing usage of LLMs in decision-support settings, greater transparency is essential not only for understanding model behavior but also for auditing whether recommendations are robust, unbiased, and aligned with user preferences
+
+> 2. Implement larger models as travel assistants.
 
 Although it might be easier to implement a smaller model, given its lower compute requirements, it is important to be aware that these smaller models are often more influenced by the order bias.
-Therefore, they might be - for now - less suitable for automated decision making. 
+Therefore, they might be less suitable for automated decision making. 
 
-> 2. LLMs can be steered to act as how you prefer.
-
-LLMs are highly prompt sensitive. That means that the way a question is posed or a statement is phrased, highly influences the final response.
-Therfore, careful prompt formulation can steer LLMs to act according to your preferences. For example, in our study, we were able to steer the LLMs to put less value on the hotel club access by shortening the description of what "hotel club access" includes.
-However, this also means that practitioners should be careful when implementing LLMs for automated decision making, as the way the prompt is formulated can have a big impact on the final response of the LLM.
-
-> 3. Carefully create user profiles
+> 3. Be aware of shifted WTP behavior depending on the user context. 
  
-Adding user information can help LLMs better align with human preferences, but it can also reduce nuance and oversimplify what a user actually wants. This means that user profiles should be applied carefully when personalizing automated decisions.
+ it is crucial to handle the addition of user information carefully, as different ways of including this information
+(persona, ICL examples, or both) result in different WTP values. It is also important to understand the different behavior across models, as shown these can lead to large differences in estimated WTP values.
+
+> 4. Hedge your assistant against positive framing.
+
+It is crucial to be aware of the sensitivity of LLMs to positive framing.
+Suppliers can be able to exploit this sensitivity by including positive framing in their product or hotel descriptions. Therefore, additional research is required into the best ways of hedging models against this positive framing.
+Therfore, careful prompt formulation can steer LLMs to act according to your preferences. For example, in our study, we were able to steer the LLMs to put less value on the hotel club access by shortening the description of what "hotel club access" includes.
+
+> 5. Prefer human-in-the-loop deployment over full autonomy.
+
+Over our different experiments, we have identified several breakdown cases of LLMs, such as order bias or economically incoherent trade-offs. This shows that LLMs should be deployed with additional sanity checks or human-in-the-loop fallback options, when these situations occur.
 
 These specific implications can be synthesized into a more general finding, namely that practitioners should be careful when implementing LLMs for automated decision-making and that thorough testing of their pipelines is required.
+
 
 
 `
