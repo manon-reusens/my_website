@@ -15,7 +15,7 @@ const CV: React.FC = () => {
   const thesis = publicationsData.find(p => p.type === 'thesis');
   const featuredPubs = PublicationsAPI.getRecent(5);
   const recentTalks = TalksAPI.getRecent(3, { excludeIds: ['custom-topics'] });
-  const { current: currentTeaching, guestLectures } = TeachingAPI.getAll();
+  const { current: currentTeaching, past: pastTeaching, guestLectures } = TeachingAPI.getAll();
   const GoogleScholar = (props: any) => <Icon component={GoogleScholarSvg} {...props} />;
 
   const contactIcons = [
@@ -169,6 +169,14 @@ const CV: React.FC = () => {
               <Space orientation="vertical" size="middle" style={{ width: '100%' }}>
                 <Title level={4} style={{ margin: 0 }}>Teaching</Title>
                 {currentTeaching.map((teaching) => (
+                  <Space key={teaching.id} orientation="vertical" size={0}>
+                    <Text strong>{teaching.role} — {teaching.course}</Text>
+                    <Text type="secondary">
+                      {teaching.institution} — {teaching.startYear}–{teaching.endYear || 'present'}
+                    </Text>
+                  </Space>
+                ))}
+                {pastTeaching.map((teaching) => (
                   <Space key={teaching.id} orientation="vertical" size={0}>
                     <Text strong>{teaching.role} — {teaching.course}</Text>
                     <Text type="secondary">
