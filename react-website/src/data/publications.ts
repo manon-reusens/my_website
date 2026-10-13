@@ -141,7 +141,7 @@ export const publicationsData: Publication[] = [
   {
     id: "preprint-2026-last_translation_benchmark",
     type: "preprint",
-    title: "LLM Consumer Behavior Theory: Foundations of a Novel Research Field",
+    title: "Last Translation Benchmark",
     authors: ["Vilém Zouhar", "Niyati Bafna", "Mukund Choudhary","...","Manon Reusens", "...", "Zaid Alyafeai"],
     year: 2026,
     date: "2026-09-03",
