@@ -67,6 +67,7 @@ export interface TeachingActivity {
 
 export interface TeachingData {
   current: TeachingActivity[];
+  past: TeachingActivity[];
   guestLectures: TeachingActivity[];
   assistantships: TeachingActivity[];
 }

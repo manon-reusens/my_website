@@ -3,12 +3,33 @@ import type { TeachingData } from '../types';
 export const teachingData: TeachingData = {
   current: [
     {
+      id: "teach-2025-dse",
+      role: "Co-teaching Lecturer",
+      course: "Data Science and Ethics",
+      institution: "UAntwerpen, Faculty of Business and Economics",
+      startYear: 2026,
+      endYear: null,
+      ects: 3,
+      students: "50+",
+      level: "Master Level",
+      description: "As the Co-teaching Lecturer for Data Science and Ethics, I teach ethical foundations of data science and the importance of responsible AI throughout the entire development pipeline. .",
+      tags: ["Data Science", "Ethics", "Responsible AI"],
+      responsibilities: [
+        "Deliver comprehensive curriculum on Data Science and Ethics",
+        "Show relevant examples of ethical dilemmas in data science",
+        "Assess the students' understanding of the course at the exam",
+        "Provide feedback to the students about their exam performance"
+      ]
+    }
+  ],
+  past: [
+    {
       id: "teach-2025-dbm",
-      role: "Guest Lecturer",
+      role: "Guest Professor",
       course: "Principles of Database Management",
       institution: "KU Leuven, Faculty of Business and Economics",
       startYear: 2025,
-      endYear: null,
+      endYear: 2026,
       ects: 6,
       students: "200+",
       level: "Bachelor & Master Level",
@@ -110,11 +131,13 @@ export const teachingData: TeachingData = {
 export const TeachingAPI = {
   getAll: () => ({
     current: teachingData.current,
+    past: teachingData.past,
     guestLectures: teachingData.guestLectures,
     assistantships: teachingData.assistantships
   }),
   
   getCurrent: () => teachingData.current,
+  getPast: () => teachingData.past,
   getGuestLectures: () => teachingData.guestLectures,
   getGuestLecturesByYear: (year: number) => teachingData.guestLectures.filter(g => g.year === year),
   getAssistantships: () => teachingData.assistantships,
@@ -122,6 +145,7 @@ export const TeachingAPI = {
   getAllSortedByYear: () => {
     const all = [
       ...teachingData.current.map(t => ({ ...t, category: 'current', year: t.startYear || 0 })),
+      ...teachingData.past.map(t => ({ ...t, category: 'past', year: t.startYear || 0 })),
       ...teachingData.guestLectures.map(t => ({ ...t, category: 'guest' })),
       ...teachingData.assistantships.map(t => ({ ...t, category: 'assistant', year: t.startYear || 0 }))
     ];

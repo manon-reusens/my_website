@@ -6,7 +6,7 @@ import './Teaching.css';
 const { Title, Paragraph, Text } = Typography;
 
 const Teaching: React.FC = () => {
-  const { current, guestLectures, assistantships } = TeachingAPI.getAll();
+  const { current, past, guestLectures, assistantships } = TeachingAPI.getAll();
 
   return (
     <Space orientation="vertical" size="large" style={{ width: '100%', maxWidth: 1200 }}>
@@ -64,7 +64,55 @@ const Teaching: React.FC = () => {
           </Row>
         </Space>
       )}
-
+      {/* Past Teaching Experience*/}
+      {past.length > 0 && (
+        <Space orientation="vertical" size="middle" style={{ width: '100%' }}>
+          <Divider>
+            <Title level={3} style={{ margin: 0 }}>Past Teaching</Title>
+          </Divider>
+          <Row gutter={[16, 16]}>
+            {past.map((teaching) => (
+              <Col key={teaching.id} xs={24}>
+                <Card className='teaching-card' hoverable>
+                  <Space orientation="vertical" size="small" style={{ width: '100%' }}>
+                    <Space wrap>
+                      <Tag className='tag tag-primary'>{teaching.role}</Tag>
+                      <Tag color="default">{teaching.level}</Tag>
+                      <Text type="secondary">
+                        {teaching.startYear}–{teaching.endYear || 'present'}
+                      </Text>
+                    </Space>
+                    <Title level={4} style={{ margin: 0 }}>{teaching.course}</Title>
+                    <Tag>{teaching.institution}</Tag>
+                    <Text type="secondary">
+                      {teaching.ects && `${teaching.ects} ECTS`}
+                      {teaching.students && ` • ${teaching.students} students`}
+                    </Text>
+                    <Paragraph>{teaching.description}</Paragraph>
+                    
+                    {teaching.responsibilities && teaching.responsibilities.length > 0 && (
+                      <div>
+                        <Text strong>Responsibilities:</Text>
+                        <ul style={{ marginTop: 8, marginLeft: 20 }}>
+                          {teaching.responsibilities.map((resp, idx) => (
+                            <li key={idx}>{resp}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    
+                    <Space wrap size="small">
+                      {teaching.tags.map((tag) => (
+                        <Tag key={tag} color="default">{tag}</Tag>
+                      ))}
+                    </Space>
+                  </Space>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </Space>
+      )}
       {/* Guest Lectures */}
       {guestLectures.length > 0 && (
         <Space orientation="vertical" size="middle" style={{ width: '100%' }}>

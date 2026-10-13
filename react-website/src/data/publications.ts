@@ -139,6 +139,57 @@ export const publicationsData: Publication[] = [
     featured: false
   },
   {
+    id: "preprint-2026-last_translation_benchmark",
+    type: "preprint",
+    title: "LLM Consumer Behavior Theory: Foundations of a Novel Research Field",
+    authors: ["Vilém Zouhar", "Niyati Bafna", "Mukund Choudhary","...","Manon Reusens", "...", "Zaid Alyafeai"],
+    year: 2026,
+    date: "2026-09-03",
+    venue: "Arxiv Preprint",
+    venueType: "ArXiv",
+    description: "This paper provides a novel translationbenchmark dataset.",
+    tags: ["Machine Translation", "Large Language Models"],
+    links: {
+      paper: "https://arxiv.org/abs/2609.04173"
+    },
+    emoji: "🌐",
+    featured: false
+  },
+  {
+    id: "preprint-2026-llm_consumer_behavior",
+    type: "preprint",
+    title: "LLM Consumer Behavior Theory: Foundations of a Novel Research Field",
+    authors: ["Manon Reusens", "Sofie Goethals", "David Martens"],
+    year: 2026,
+    date: "2026-06-16",
+    venue: "Arxiv Preprint",
+    venueType: "ArXiv",
+    description: "This paper lays the foundation for a new research field: LLM Consumer Behavior Theory.",
+    tags: ["Consumer Behavior", "Large Language Models", "Responsible AI"],
+    links: {
+      paper: "https://arxiv.org/abs/2606.18005"
+    },
+    emoji: "🌐",
+    featured: false
+  },
+  {
+    id: "ecaf-2026-towards",
+    type: "conference",
+    title: "Towards Formalizing the Bias-Personalization Trade-off in Large Language Models",
+    authors: ["Sofie Goethals", "Manon Reusens"],
+    year: 2026,
+    date: "2026-09-30",
+    venue: "European Conference on Algorithmic Fairness",
+    venueType: "Conference Paper",
+    description: "This study focuses on the trade-off between bias and personalization in large language models.",
+    tags: ["Bias-Personalization Trade-off", "Large Language Models", "Responsible AI"],
+    links: {
+      paper: "https://proceedings.mlr.press/v350/goethals26a.html"
+    },
+    emoji: "🌐",
+    featured: true
+  },
+  {
     id: "ijcnlp-2025-nativedesign",
     type: "conference",
     title: "Native Design Bias: Studying the Impact of English Nativeness on Language Model Performance",

@@ -4,13 +4,13 @@ export const websiteConfig: WebsiteConfig = {
   personal: {
     name: "Manon Reusens",
     title: "PhD",
-    tagline: "Expert in Responsible AI & Large Language Models",
-    subtitle: "Research Manager at ACRAI | Guest Lecturer at KU Leuven | Bridging technical excellence with societal impact in NLP",
+    tagline: "Senior Researcher in Responsible AI & Large Language Models",
+    subtitle: "Research Manager at ACRAI  | Bridging technical excellence with societal impact in NLP",
     profileImage: "profile.jpg",
     
     contact: {
       email: "manon.reusens@uantwerpen.be",
-      location: "Antwerp & Leuven, Belgium",
+      location: "Antwerp, Belgium",
       linkedin: "https://www.linkedin.com/in/manon-reusens-0a3b63189",
       scholar: "https://scholar.google.be/citations?user=fvbtYzMAAAAJ",
       orcid: "https://orcid.org/0000-0002-0275-0679",
@@ -19,7 +19,6 @@ export const websiteConfig: WebsiteConfig = {
     
     positions: [
       { title: "Research Manager of ACRAI, University of Antwerp", icon: "briefcase" },
-      { title: "Guest Lecturer, KU Leuven", icon: "book" },
     ],
     
     bio: [
@@ -30,17 +29,16 @@ export const websiteConfig: WebsiteConfig = {
     ],
     
     researchFocus: [
-      "Responsible AI Development",
+      "Responsible AI",
+      "Agentic Consumer behavior",
       "Bias & Fairness in LLMs",
-      "Explaining LLM behavior",
       "Multilingual NLP",
       "Computational Social Science",
-      "AI Ethics for Industry Applications",
-      "LLM Persona Consistency"
     ],
     
     expertise: [
       "Bias & Fairness in AI",
+      'Agentic consumer behavior',
       "Large Language Models",
       "Multilingual NLP",
       "Responsible AI",
